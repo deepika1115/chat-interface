@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    
+	<link href="./chat.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+<div>
+	<h2 style="font-weight: normal;color: orange;"><b>LIVE</b>PERSON</h2>
+</div>
+<div class="relative">
+<div style="background-color: whitesmoke; min-height: 380px;font-family: Lucida Console, Monaco, monospace;padding: 20px;">
+
+	<h1 style="width: 380px;font-weight: normal;color: grey; margin-left: 30px;">LivesEngage Makes it Easy to Connect with Your Customers</h1>
+	<h3 style="width: 380px;font-weight: normal;margin-top: 2px;color: grey;margin-left: 30px;">Increase sales conversions and overall customer satisfaction</h3>
+	<md-button style="border-radius: 3px;background-color: #ff7200;padding: 10px; color: white;margin-left: 40px;">Try it Free</md-button>
+	
+</div>
+</div>
+<div id="footer">
+<h2 align="center" style="font-weight: normal;font-family: Lucida Console, Monaco, monospace;">LiveEngage is the solution chosen by the world's top brands</h2>
+<ul>
+<li><img src="1adobe.png" height="80px" width="80px"></li>
+<li><img src="2microsoft.jpg" height="100px" width="100px"></li>
+<li><img src="3intuti.jpg" height="100px" width="100px"></li>
+<li><img src="4ibm.png" height="100px" width="100px"></li>
+</ul>
+	<md-button style="border-radius: 50%;background-color:#ff7200 ;padding: 20px;color: white;float: right;"  ng-click="show = true">Chat
+	</md-button>
+</div>
+
+<!--card-->
+<div class="absolute" ng-show="show" layout layout-align="end-start" >
+	<md-card flex=25>
+            <md-toolbar class="md-hue-2" style="background-color: #ff7200">
+                <div class="md-toolbar-tools" layout layout-align="space-between center">
+                    <span >Chat With Us</span> 
+                    <div layout layout-align="end center">
+                        <i class="material-icons" ng-show="showicon" ng-click="hidediv=false; showicon=false; rem=!rem">keyboard_arrow_up</i>
+                        <i class="material-icons" ng-hide="rem" ng-click="hidediv=true; showicon=true; rem=true" style="margin-top:12px" >remove</i>
+                        <i class="material-icons" ng-click="show= false">close</i>
+
+                    </div>
+                </div>
+            </md-toolbar>
+            <div ng-hide="hidediv">
+            <div layout="column" layout-align="center center" layout-margin>
+                <span><b>Welcome to LivePerson!</b><br></span>
+                <span>We can't wait to chat with you.</span>
+            </div>
+            <md-divider></md-divider>
+            <form name="myForm" novalidate>
+            <div layout="column" layout-margin>
+                <div>What is your name?*</div><input type="text" name="myName" ng-model="myName" placeholder="Enter text here" style="font-style: italic;" required layout="column">
+                    <span style="font-size: 10px; color: red;" ng-show="myForm.myName.$touched && myForm.myName.$invalid"></span>
+                    <span style="font-size: 10px; color: red;" ng-show="myForm.myName.$error.required">Name is required.</span>
+               
+                </input>
+                <div>Email Address*</div><input type="email" name="email" ng-model="email" placeholder="Enter text here" style="font-style: italic;" required layout="column">
+                	<span style="font-size: 10px; color: red;" ng-show="myForm.address.$touched && myForm.address.$invalid"></span>
+                    <span style="font-size: 10px; color: red;" ng-show="myForm.email.$error.required">Email is required.</span>
+                    <span style="font-size: 10px; color: red;" ng-show="myForm.email.$error.email">Invalid email address.</span>
+                </input>
+                <div>Company name?</div><input type="text" ng-model="company" placeholder="Enter text here" style="font-style: italic;"></input>
+            </div>
+            <div>
+                  <section layout="row" layout-sm="row" layout-align="end center" layout-wrap>
+                   <md-button ng-click="show=false">Cancel</md-button>
+                <md-button class="md-raised md-warn" style="background-color: #ff7200" ng-click="myVal=true" ng-disabled="myForm.myName.$error.required && myForm.myName.$invalid ||
+                myForm.email.$error.required && myForm.email.$invalid">Submit</md-button>
+
+
+
+
+
+            </div></form>
+            </div>
+        </md-card>
+</div>        
+
+
+<!-- second card-->
+
+<div class="absolute" ng-show="myVal"  layout layout-align="end-start" style="height: 430px;">
+	<md-card flex=25 >
+            <md-toolbar class="md-hue-2" style="background-color: #ff7200">
+                <div class="md-toolbar-tools" layout layout-align="space-between center">
+                    <span >Connecting</span> 
+                    <div layout layout-align="end center">
+                        <i class="material-icons" style="margin-top:12px" >remove</i>
+                        <i class="material-icons">call_made</i>
+                        <i class="material-icons" ng-click="myVal= false">close</i>
+                    </div>
+                </div>
+            </md-toolbar>
+            <div style="font-weight: normal;color: orange; padding: 15px;text-align: center"><b>LIVE</b>PERSON</div>
+            <md-divider></md-divider>
+            <div layout="column" layout-align="start center" layout-margin  style="font-size:15px; color:#707173; min-height:280px;">
+
+                <span style="font-size: 12px;">Info at: {{ today | date:"h:mm , MMM d"}}:</span>
+                <span>Welcome to LivePerson!<br></span>
+                <span>A representative will be with you shortly.</span>
+                 
+                 
+                 <h4 style=" align-self: left;
+                             background-color: antiquewhite;
+                             border-radius: 9%;
+                             min-width: 140px;
+                             padding: 5px;" ng-repeat='x in records'>{{x}}</h4>
+            
+            
+            <md-divider></md-divider>
+            
+            <div layout="row" layout-align="space around center" style="height:50px;">
+                <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button>
+                <input type="text" ng-model="text" placeholder="Enter text here" style="font-style: italic; width:100%;"></input>
+                <md-button class="md-icon-button" ng-click="func(text)"><i class="material-icons" >arrow_forward</i></md-button>
+            </div>
+        </md-card>
+    </div>
+
+<!--chat box-->
+<!--  -->
+<!-- <div class="absolute" ng-show="showme"  layout layout-align="end-start" style="height: 430px;">
+	<md-card flex=25 >
+            <md-toolbar class="md-hue-2" style="background-color: #ff7200">
+                <div class="md-toolbar-tools" layout layout-align="space-between center">
+                    <span layout layout-align="ceneter center">
+                    <i class="material-icons">chat_bubble_outline</i>
+                    Mariela</span> 
+                    <div layout layout-align="end center">
+                        <i class="material-icons" style="margin-top:12px" >remove</i>
+                        <i class="material-icons">call_made</i>
+                        <i class="material-icons" ng-click="showme= false">close</i>
+                    </div>
+                </div>
+            </md-toolbar>
+            
+            <md-divider></md-divider>
+            <div layout="column" layout-align="star center" layout-margin  style="font-size:15px; color:#707173;">
+
+                <span style="font-size: 12px;">Info at: {{ today | date:"h:mm , MMM d"}}:</span>
+                <span>Welcome to LivePerson!<br></span>
+                <span>A representative will be with you shortly.</span>
+            </div>
+            <div layout="column" layout-align="start center" layout-margin  style="font-size:15px; color:#707173;">
+
+                <span style="font-size: 12px;">Info at: {{ today | date:"h:mm , MMM d"}}:</span>
+                <span>You are now chatting with Mariela</span>
+            </div>
+            <div style="font-size:12px;">Mariela at: {{ today | date:"h:mm , MMM d"}}:</div>
+            <div layout layout-align="start center" layout margin>
+                <img src="chatt.png" style="height: 35px; width:35px; border-radius:50%; margin:8px;">
+                <div class="bubble" style="font-size:12px; color:white;" >Hello, I'm here to answer your questions about LivePerson services.</div>
+            </div>
+            <div style="font-size:12px;">Mariela at: {{ today | date:"h:mm , MMM d"}}:</div>
+            <div layout layout-align="start center" layout margin>
+                <img src="chatt.png" style="height: 35px; width:35px; border-radius:50%; margin:8px;">
+                <div class="bubble" style="font-size:12px; color:white;">How can i help you today?</div>
+            </div>
+            <div layout="column" layout-align="end end" layout margin>
+                <div style="font-size:12px;margin-top: 20px;">Sam at: {{ today | date:"h:mm , MMM d"}}:</div>
+                <p class="speech">Hello</p>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" layout-align="space around center" style="height:50px;">
+                <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button>
+                <input type="text" placeholder="Enter text here" style="font-style: italic; width:100%;"></input>
+                <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >arrow_forward</i></md-button>
+            </div>
+
+</div> -->
+
+
+ <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<script src="./chat.js"></script>
+
+
+</body>
+
+</html>
+
+
+
+
+
