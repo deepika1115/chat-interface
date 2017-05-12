@@ -64,25 +64,24 @@
                     <span style="font-size: 10px; color: red;" ng-show="myForm.myName.$touched && myForm.myName.$invalid">
                     <span style="font-size: 10px; color: red;" ng-show="myForm.myName.$error.required">Name is required.</span>
                     </span>
+
                
                 </input>
                 <div>Email Address*</div><input type="email" name="email" ng-model="email" placeholder="Enter text here" style="font-style: italic;" required layout="column">
                 	<span style="font-size: 10px; color: red;" ng-show="myForm.email.$touched && myForm.email.$invalid">
-                        <span style="font-size: 10px; color: red;" ng-show="myForm.email.$error.required">Email is required.</span>
-                        <span style="font-size: 10px; color: red;">Invalid email address.</span>
+
+                    <span style="font-size: 10px; color: red;" ng-show="myForm.email.$error.required">Email is required.</span>
+                    <span style="font-size: 10px; color: red;" ng-show="myForm.email.$error.email">Invalid email address.</span>
                     </span>
                 </input>
-                <div>Company name?</div><input type="text" ng-model="company" placeholder="Enter text here" style="font-style: italic;"></input>
+                <div>Company name?</div><input type="text" name="company" ng-model="company" placeholder="Enter text here" style="font-style: italic;"></input>
             </div>
             <div>
                   <section layout="row" layout-sm="row" layout-align="end center" layout-wrap>
                    <md-button ng-click="show=false">Cancel</md-button>
-                <md-button class="md-raised md-warn" style="background-color: #ff7200" ng-click="myVal=true; show=false;" ng-disabled="myForm.myName.$error.required && myForm.myName.$invalid ||
-                myForm.email.$error.required && myForm.email.$invalid">Submit</md-button>
 
-
-
-
+                <md-button class="md-raised md-warn" style="background-color: #ff7200" ng-disabled="myForm.myName.$untouched && myForm.myName.$error.required || myForm.myName.$invalid ||
+                myForm.email.$untouched && myForm.email.$error.required || myForm.email.$invalid" ng-click="myVal=true">Submit</md-button>
 
             </div></form>
             </div>
@@ -97,7 +96,8 @@
                     <div layout layout-align="end center">
                         <i class="material-icons" style="margin-top:12px" >remove</i>
                         <i class="material-icons">call_made</i>
-                        <i class="material-icons" ng-click="myVal=!myVal">close</i>
+
+                        <i class="material-icons" ng-click="myVal = false">close</i>
                     </div>
                 </div>
             </md-toolbar>
@@ -120,6 +120,7 @@
             <div layout="row" layout-align="space around center" style="height:25%;">
                 <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button>
                 <input type="text" ng-model="text" placeholder="Enter text here" style="font-style: italic; width:100%;" onblur="this.focus()" autofocus></input>
+
                 <md-button class="md-icon-button" ng-click="func(text)"><i class="material-icons" >arrow_forward</i></md-button>
             </div>
         </md-card>
@@ -184,6 +185,10 @@
 
   <!-- Angular Material Library -->
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+  <!--local storage linraray-->
+  <script src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
+
 
 <script src="./chat.js"></script>
 

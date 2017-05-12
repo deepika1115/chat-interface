@@ -1,12 +1,14 @@
+
 var app = angular.module('myApp', ['ngMaterial']);
-app.controller("myCtrl",function($scope,$timeout){
+app.controller("myCtrl",function($scope){
 	$scope.today = new Date(); 
 	
-
-	$scope.myName;
-	 $scope.email;
-	 $scope.company;
     
+	$scope.myName;
+	$scope.email;
+	$scope.company;
+
+	
                
 
 $scope.records = [];
@@ -16,5 +18,4 @@ $scope.records = [];
     $scope.text = "";
   }
 	
-
 });
