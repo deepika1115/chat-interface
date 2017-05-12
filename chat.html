@@ -41,12 +41,12 @@
 
 <!--card-->
 	<md-card flex=25 ng-show="show" style="position:fixed; top:20%; left: 78%; width: 21%; z-index:1;">
-            <md-toolbar class="md-hue-2" style="background-color: #ff7200">
+            <md-toolbar class="md-hue-2" style="background-color: #ff7200" ng-class="{'minimise' : hidediv}">
                 <div class="md-toolbar-tools" layout layout-align="space-between center">
                     <span >Chat With Us</span> 
                     <div layout layout-align="end center">
-                        <i class="material-icons" ng-show="showicon" ng-click="hidediv=false; showicon=false; rem=!rem">keyboard_arrow_up</i>
-                        <i class="material-icons" ng-hide="rem" ng-click="hidediv=true; showicon=true; rem=true" style="margin-top:12px" >remove</i>
+                        <i class="material-icons" ng-show="showicon" ng-click="hidediv=false; showicon=false; rem=!rem" >keyboard_arrow_up</i>
+                        <i class="material-icons" ng-hide="rem" ng-click="hidediv=true; showicon=true; rem=true" style="margin-top:12px;">remove</i>
                         <i class="material-icons" ng-click="show= false">close</i>
 
                     </div>
@@ -61,21 +61,23 @@
             <form name="myForm" novalidate>
             <div layout="column" layout-margin>
                 <div>What is your name?*</div><input type="text" name="myName" ng-model="myName" placeholder="Enter text here" style="font-style: italic;" required layout="column">
-                    <span style="font-size: 10px; color: red;" ng-show="myForm.myName.$touched && myForm.myName.$invalid"></span>
+                    <span style="font-size: 10px; color: red;" ng-show="myForm.myName.$touched && myForm.myName.$invalid">
                     <span style="font-size: 10px; color: red;" ng-show="myForm.myName.$error.required">Name is required.</span>
+                    </span>
                
                 </input>
                 <div>Email Address*</div><input type="email" name="email" ng-model="email" placeholder="Enter text here" style="font-style: italic;" required layout="column">
-                	<span style="font-size: 10px; color: red;" ng-show="myForm.address.$touched && myForm.address.$invalid"></span>
-                    <span style="font-size: 10px; color: red;" ng-show="myForm.email.$error.required">Email is required.</span>
-                    <span style="font-size: 10px; color: red;" ng-show="myForm.email.$error.email">Invalid email address.</span>
+                	<span style="font-size: 10px; color: red;" ng-show="myForm.email.$touched && myForm.email.$invalid">
+                        <span style="font-size: 10px; color: red;" ng-show="myForm.email.$error.required">Email is required.</span>
+                        <span style="font-size: 10px; color: red;">Invalid email address.</span>
+                    </span>
                 </input>
                 <div>Company name?</div><input type="text" ng-model="company" placeholder="Enter text here" style="font-style: italic;"></input>
             </div>
             <div>
                   <section layout="row" layout-sm="row" layout-align="end center" layout-wrap>
                    <md-button ng-click="show=false">Cancel</md-button>
-                <md-button class="md-raised md-warn" style="background-color: #ff7200" ng-click="myVal=true" ng-disabled="myForm.myName.$error.required && myForm.myName.$invalid ||
+                <md-button class="md-raised md-warn" style="background-color: #ff7200" ng-click="myVal=true; show=false;" ng-disabled="myForm.myName.$error.required && myForm.myName.$invalid ||
                 myForm.email.$error.required && myForm.email.$invalid">Submit</md-button>
 
 
@@ -88,15 +90,14 @@
 
 
 <!-- second card-->
-
 	   <md-card flex=25 ng-show="myVal" style="position:fixed; top:20%; left: 78%; width: 21%; z-index:1; height: 460px;" >
-            <md-toolbar class="md-hue-2" style="background-color: #ff7200" md-scroll-shrink ng-if="true">
+            <md-toolbar class="md-hue-2" style="background-color: #ff7200">
                 <div class="md-toolbar-tools" layout layout-align="space-between center">
                     <span >Connecting</span> 
                     <div layout layout-align="end center">
                         <i class="material-icons" style="margin-top:12px" >remove</i>
                         <i class="material-icons">call_made</i>
-                        <i class="material-icons" ng-click="myVal= false">close</i>
+                        <i class="material-icons" ng-click="myVal=!myVal">close</i>
                     </div>
                 </div>
             </md-toolbar>
@@ -118,11 +119,10 @@
             <md-divider></md-divider>
             <div layout="row" layout-align="space around center" style="height:25%;">
                 <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button>
-                <input type="text" ng-model="text" placeholder="Enter text here" style="font-style: italic; width:100%;"></input>
+                <input type="text" ng-model="text" placeholder="Enter text here" style="font-style: italic; width:100%;" onblur="this.focus()" autofocus></input>
                 <md-button class="md-icon-button" ng-click="func(text)"><i class="material-icons" >arrow_forward</i></md-button>
             </div>
         </md-card>
-
   <!--  -->
 <!-- <div class="absolute" ng-show="showme"  layout layout-align="end-start" style="height: 430px;">
 	<md-card flex=25 >

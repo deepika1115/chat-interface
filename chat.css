@@ -88,4 +88,15 @@ border-radius:10px;
     border: 6px solid;
     border-color: #fff transparent transparent #fff;
      }
-    																																																									
+    .minimise{
+               position: fixed;
+               top:90%;
+               left:79%;
+               width:21%;
+              
+
+    }	
+
+    i{
+        cursor:pointer;
+    }																																																								
