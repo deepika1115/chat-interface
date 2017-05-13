@@ -89,42 +89,44 @@
 
 
 <!-- second card-->
-	   <md-card flex=25 ng-show="myVal" style="position:fixed; top:20%; left: 78%; width: 21%; z-index:1; height: 460px;" >
+	   <md-card flex=25 ng-show="myVal" style="position:fixed; top:20%; left: 78%; width: 21%; z-index:1;" >
             <md-toolbar class="md-hue-2" style="background-color: #ff7200" ng-class="{'minimise' : hidediv2}">
                 <div class="md-toolbar-tools" layout layout-align="space-between center">
                     <span >Connecting</span> 
                     <div layout layout-align="end center">
-                        <i class="material-icons" ng-click="hidediv2=true" style="margin-top:12px" >remove</i>
-                        <i class="material-icons" ng-click="hidediv2=false">call_made</i>
+                    <i class="material-icons" ng-show="showicon" ng-click="hidediv2=false; showicon=false; rem=!rem" >keyboard_arrow_up</i>
+
+                        <i class="material-icons" ng-hide="rem" ng-click="hidediv2=true; showicon=true; rem=true" style="margin-top:12px" >remove</i>
+                        <i class="material-icons" >call_made</i>
 
                         <i class="material-icons" ng-click="myVal = false">close</i>
                     </div>
                 </div>
             </md-toolbar>
             <!-- part to be hide on minimize-->
-            <div ng-hide="hidediv2">
-            <div layout="column" layout-align="center center" style="height:50%">
-                <img src="liveperson.png"  height="25%" width="50%">
-                 <span style="font-size: 12px;">Info at: {{ today | date:"h:mm , MMM d"}}:</span>
-                <span style="text-align:center;font-size: 15px;">Welcome to LivePerson!</span>
-                <span style="text-align:center;font-size: 15px;">A representative will be with you shortly.</span>
-                 
-            </div>
-            <div layout="column" layout-align="start center" style="font-size:15px; color:#707173;  overflow-y: scroll; height: 100%;" layout-margin>
-                 <h4 style=" align-self: left;
-                             background-color: antiquewhite;10
-                             border-radius: 9%;
-                             min-width: 140px;
-                             padding: 5px;" ng-repeat='x in records'>{{x}}</h4>
+            <div ng-hide="hidediv2" style="height:400px;">
+                <div layout="column" layout-align="center center" style="height:25%">
+                    <img src="liveperson.png"  height="25%" width="50%">
+                     <span style="font-size: 12px;">Info at: {{ today | date:"h:mm , MMM d"}}:</span>
+                    <span style="text-align:center;font-size: 15px;">Welcome to LivePerson!</span>
+                    <span style="text-align:center;font-size: 15px;">A representative will be with you shortly.</span>
+                     
+                </div>
+                <div layout="column" layout-align="start center" style="font-size:15px; color:#707173;  overflow-y: scroll; height:60%;" layout-margin>
+                     <h4 style=" align-self: left;
+                                 background-color: antiquewhite;10
+                                 border-radius: 9%;
+                                 min-width: 140px;
+                                 padding: 5px;" ng-repeat='x in records'>{{x}}</h4>
 
-            </div>
-            <md-divider></md-divider>
-            <div layout="row" layout-align="space around center" style="height:25%;">
-                <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button>
-                <input type="text" ng-model="text" placeholder="Enter text here" style="font-style: italic; width:100%;" onblur="this.focus()" autofocus></input>
+                </div>
+                <md-divider></md-divider>
+                <div layout="row" layout-align="space around center" style="height:10%;">
+                    <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button>
+                    <input type="text" ng-model="text" placeholder="Enter text here" style="font-style: italic; width:100%;" onblur="this.focus()" autofocus></input>
 
-                <md-button class="md-icon-button" ng-click="func(text)"><i class="material-icons" >arrow_forward</i></md-button>
-            </div>
+                    <md-button class="md-icon-button" ng-click="func(text)"><i class="material-icons" >arrow_forward</i></md-button>
+                </div>
             </div>
             <!--on minimize hidden part end--> 
         </md-card>
