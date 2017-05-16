@@ -123,7 +123,7 @@
                 <md-divider></md-divider>
                 <div layout="row" layout-align="space around center" style="height:10%;">
                     <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button>
-                    <input type="text" ng-model="text" placeholder="Enter text here" style="font-style: italic; width:100%;" onblur="this.focus()" autofocus></input>
+                    <input type="text" ng-model="text" placeholder="Enter text here" ng-enter = "func(text)" style="font-style: italic; width:100%;" onblur="this.focus()" autofocus></input>
 
                     <md-button class="md-icon-button" ng-click="func(text)"><i class="material-icons" >arrow_forward</i></md-button>
                 </div>
