@@ -4,7 +4,7 @@
 
 	<title></title>
     
-	<link href="style/chat.css" rel="stylesheet">
+	<link href="/style/chat.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 </head>
@@ -117,7 +117,7 @@
                                  background-color: antiquewhite;10
                                  border-radius: 9%;
                                  min-width: 140px;
-                                 padding: 5px;" ng-repeat='x in records'>{{x}}</h4>
+                                 padding: 5px;" ng-repeat='x in records track by $index' >{{x}}</h4>
 
                 </div>
                 <md-divider></md-divider>
@@ -128,6 +128,7 @@
                     <md-button class="md-icon-button" ng-click="func(text)"><i class="material-icons" >arrow_forward</i></md-button>
                 </div>
             </div>
+
             <!--on minimize hidden part end--> 
         </md-card>
   
@@ -148,7 +149,7 @@
 <script src="static/js/bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
 
 <script src="static/js/chat.js"></script>
- 
+
 
 
 </body>
