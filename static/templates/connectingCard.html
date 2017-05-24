@@ -1,0 +1,35 @@
+<!-- <div style="padding:0% 5% 0% 5%;"> -->
+<md-card>
+   <md-toolbar  class="md-hue-2 bg_color" ng-class="{'minimise' : hidediv2}">
+      <div class="md-toolbar-tools" layout layout-align="space-between center">
+         <span >Connecting</span> 
+         <div layout layout-align="end center">
+            <i class="material-icons" ng-show="showicon" ng-click="hidediv2=false; showicon=false; rem=!rem" >keyboard_arrow_up</i>
+            <i class="material-icons remove_icon" ng-hide="rem" ng-click="hidediv2=true; showicon=true; rem=true" >remove</i>
+            <a href="#/max" target="blank"><i class="material-icons" >call_made</i></a>
+            <i class="material-icons" ng-click="myVal = false">close</i>
+         </div>
+      </div>
+   </md-toolbar>
+   <!-- part to be hide on minimize-->
+   <div ng-hide="hidediv2" ng-class="">
+      <div layout="column" layout-align="center center" class="card_height">
+         <img src=" /images/liveperson.png"  height="25%" >
+         <span class="date_size">Info at: {{ today | date:"h:mm , MMM d"}}:</span>
+         <span class="welcome_messege">Welcome to LivePerson!</span>
+         <span class="welcome_messege">A representative will be with you shortly.</span>
+      </div>
+      <div layout="column" layout-align="start center" class="chat_space" layout-margin>
+         <h4 class="chat_message" ng-repeat='x in records track by $index'>{{x}}</h4>
+      </div>
+      <md-divider></md-divider>
+      <div layout="row" layout-align="space around center" class="bottom_icon_space">
+         <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button>
+         <input type="text" ng-model="text" placeholder="Enter text here" ng-enter = "func(text)" class="autofocus" onblur="this.focus()" autofocus flex=100></input>
+         <md-button class="md-icon-button" ng-click="func(text)"><i class="material-icons" >arrow_forward</i></md-button>
+      </div>
+   </div>
+   <!--on minimize hidden part end--> 
+</md-card>
+<!-- </div> -->
+ 

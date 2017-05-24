@@ -1,13 +1,17 @@
 application: sanskrut-dev
-version: chat2
+version: v2-chat
 runtime: python27
 api_version: 1
 threadsafe: true
 handlers:
 - url: /
-  static_files: chat.html
-  upload: chat.html
+  static_files: home.html
+  upload: home.html
   secure: always
+
+- url: /max
+  static_files: connectingCard.html
+  upload: connectingCard.html
 
 - url: /static/js
   static_dir: static/js
@@ -15,9 +19,13 @@ handlers:
   
 - url: /images
   static_dir: static/images
+
+- url: /templates
+  static_dir: static/templates
   
 - url: /libs
   static_dir: static/libs
   secure: always
+  
 - url: /style
   static_dir: static/style
