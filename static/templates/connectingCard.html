@@ -1,5 +1,5 @@
 <!-- <div style="padding:0% 5% 0% 5%;"> -->
-<md-card>
+<md-card >
    <md-toolbar  class="md-hue-2 bg_color" ng-class="{'minimise' : hidediv2}">
       <div class="md-toolbar-tools" layout layout-align="space-between center">
          <span >Connecting</span> 
@@ -12,7 +12,7 @@
       </div>
    </md-toolbar>
    <!-- part to be hide on minimize-->
-   <div ng-hide="hidediv2" ng-class="">
+   <div ng-hide="hidediv2" ng-class="{'chat_space2' : hidediv2}">
       <div layout="column" layout-align="center center" class="card_height">
          <img src=" /images/liveperson.png"  height="25%" >
          <span class="date_size">Info at: {{ today | date:"h:mm , MMM d"}}:</span>

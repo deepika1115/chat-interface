@@ -157,7 +157,8 @@ height:400px;
 font-size: 12px;
 }
 .card_height{
-height:25%;
+height:91px;
+max-height: 100%;
 }
 .welcome_messege{
 text-align:center;
@@ -167,7 +168,7 @@ font-size: 15px;
 font-size:15px; 
 color:#707173;  
 overflow-y: scroll; 
-height:60%; 
+height:200px; 
 }
 .chat_message{
 align-self: left;
@@ -183,7 +184,12 @@ height:10%;
 font-style: italic; 
 
 }
-
+.chat_space{ 
+font-size:15px; 
+color:#707173;  
+overflow-y: scroll; 
+height:100%; 
+}
 /*
 @media (max-width: 960px) {
     .card_position {
