@@ -6,7 +6,6 @@ app.config(function (localStorageServiceProvider) {
 app.controller("myCtrl",function($scope, localStorageService){
 	$scope.today = new Date(); 
 
-    
 
 	var localData = localStorageService.get('localData');
     $scope.data = localData || {
@@ -53,8 +52,16 @@ app.directive('chatCard', function(){
     return{
     restrict:'E',
     templateUrl: 'templates/connectingCard.html',
-    controller: function($scope) {
-        $scope.connecting = true;
+    controller: function($scope, $location) {
+        $scope.class = "chat_space";
+        console.log()
+        $scope.changeClass = function(){
+            if ($scope.class === "chat_space" && $location.url() == '/max')
+              $scope.class = "chat_max";
+            else
+              $scope.class = "chat_space";
+          };
+
     },
     controllerAS: "chatCard"
      };
