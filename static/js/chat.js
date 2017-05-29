@@ -57,7 +57,7 @@ app.directive('chatCard', function(){
         console.log()
         $scope.changeClass = function(){
             if ($scope.class === "chat_space" && $location.url() == '/max')
-              $scope.class = "chat_max";
+              $scope.class = "chat_default";
             else
               $scope.class = "chat_space";
           };
