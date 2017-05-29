@@ -166,10 +166,16 @@ font-size: 15px;
 }
 
 .chat_message{
-align-self: left;
 background-color: antiquewhite;
 border-radius: 9%;
 min-width: 140px;
+padding: 5px;
+}
+.chat_server_message{
+background-color: lightgreen;
+border-radius: 9%;
+min-width: 140px;
+margin-left: 20% !important;   
 padding: 5px;
 }
 .bottom_icon_space{

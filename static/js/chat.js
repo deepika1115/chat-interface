@@ -23,22 +23,30 @@ app.controller("myCtrl",function($scope, localStorageService, $window){
     
     
     
-    var msgData = localStorageService.get('msgData');
-    $scope.records = msgData || [];
-    $scope.serverRecords = [];
+    // var msgData = localStorageService.get('msgData');
+    // $scope.records = msgData || [];
+    $scope.records = [];
     $scope.text;
-    $scope.botsays;
-    
+    $scope.isTyping = false;
     $scope.func = function(text){
+        $scope.isTyping = true;
         if(text && text != ""){
-            $scope.records.push(text);
+            $scope.records.push({ 
+                type : "c",
+                data : text
+            });
             client.textRequest(text).then( function(botSays) {
-                $scope.serverRecords.push(botSays.result.fulfillment.messages)
+                $scope.records.push({
+                    type : "s",
+                    data : botSays.result.fulfillment.messages[0].speech
+                })
+                $scope.isTyping = false;
+                $scope.$apply();
                 console.log(botSays.result.fulfillment.messages[0].speech)
             }).catch( function(err) {
                 console.log(err)
             })
-            localStorageService.set('msgData',$scope.records);
+            // localStorageService.set('msgData',$scope.records);
             $scope.text = "";
         }
         else{
@@ -72,6 +80,9 @@ app.directive('chatCard', function(){
     return{
     restrict:'E',
     templateUrl: 'templates/connectingCard.html',
+    link : function(scope, element, attrs) {
+
+    },
     controller: function($scope, $location) {
         $scope.class = "chat_space";
         console.log()
@@ -95,6 +106,6 @@ app.config(['$routeProvider', function($routeProvider) {
     })
     .when("/max", {
         templateUrl : "templates/connectingCard.html",
-        controller: "myCtrl"     
+        controller: "cardCtrl"     
     })
 }]);

@@ -26,7 +26,7 @@ handlers:
 - url: /libs
   static_dir: static/libs
   secure: always
-  
+
 - url: /style
   static_dir: static/style
  
