@@ -1,0 +1,21 @@
+{
+  "name": "chat-interface",
+  "version": "1.0.0",
+  "description": "this is chat bot interface",
+  "main": "index.js",
+  "dependencies": {
+    "api-ai-javascript": "^2.0.0-beta.14",
+    "install": "^0.10.1",
+    "npm": "^4.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://source.developers.google.com/p/sanskrut-dev/r/chat-interface"
+  },
+  "author": "",
+  "license": "ISC"
+}

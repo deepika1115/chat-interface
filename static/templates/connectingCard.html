@@ -2,7 +2,8 @@
 <md-card >
    <md-toolbar  class="md-hue-2 bg_color" ng-class="{'minimise' : hidediv2}">
       <div class="md-toolbar-tools" layout layout-align="space-between center">
-         <span >Connecting</span> 
+         <span >Connect</span> 
+         <span ng-if="isTyping">Typing...</span>
          <div layout layout-align="end center">
             <i class="material-icons" ng-show="showicon" ng-click="hidediv2=false; showicon=false; rem=!rem" >keyboard_arrow_up</i>
             <i class="material-icons remove_icon" ng-hide="rem" ng-click="hidediv2=true; showicon=true; rem=true" >remove</i>
@@ -19,9 +20,13 @@
          <span class="welcome_messege">Welcome to LivePerson!</span>
          <span class="welcome_messege">A representative will be with you shortly.</span>
       </div>
-      <div layout="column" layout-align="start center" layout-margin ng-class="class" class="chat_default">
-         <h4 class="chat_message" ng-repeat='x in records track by $index'>{{x}}</h4>
+      <div layout="column" layout-align="start start" layout-margin ng-class="class" class="chat_default">
+         <div ng-repeat='msg in records track by $index' ng-class="msg.type == 'c' ? 'chat_message' : 'chat_server_message'">
+         {{msg.data}} 
+         </div>
       </div>
+      
+
       <md-divider></md-divider>
       <div layout="row" layout-align="space around center" class="bottom_icon_space">
          <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button>
