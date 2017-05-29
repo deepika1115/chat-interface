@@ -3,7 +3,7 @@ version: chat2
 runtime: python27
 api_version: 1
 threadsafe: true
-handlers:
+handlers: 
 - url: /
   static_files: chat.html
   upload: chat.html
@@ -19,5 +19,11 @@ handlers:
 - url: /libs
   static_dir: static/libs
   secure: always
+
 - url: /style
   static_dir: static/style
+ 
+- url: /target
+  static_dir: static/target
+
+

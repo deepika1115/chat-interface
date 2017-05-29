@@ -1,12 +1,14 @@
 var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule']);
+
 app.config(function (localStorageServiceProvider) {
   localStorageServiceProvider
     .setPrefix('chat');
 }); 
-app.controller("myCtrl",function($scope, localStorageService){
+
+app.controller("myCtrl",function($scope, localStorageService, $window){
 	$scope.today = new Date(); 
 
-    
+    var client = new ApiAi.ApiAiClient({accessToken: '0193cf9c63c14b3188633ea7315deb91'});
 
 	var localData = localStorageService.get('localData');
     $scope.data = localData || {
@@ -21,15 +23,33 @@ app.controller("myCtrl",function($scope, localStorageService){
 	}
     
     
+    
     var msgData = localStorageService.get('msgData');
     $scope.records = msgData || [];
+    $scope.serverRecords = [];
     $scope.text;
+    $scope.botsays;
     
     $scope.func = function(text){
-        $scope.records.push(text);
-        localStorageService.set('msgData',$scope.records);
-        $scope.text = "";
+        if(text && text != ""){
+            $scope.records.push(text);
+            client.textRequest(text).then( function(botSays) {
+                $scope.serverRecords.push(botSays.result.fulfillment.messages)
+                console.log(botSays.result.fulfillment.messages[0].speech)
+            }).catch( function(err) {
+                console.log(err)
+            })
+            localStorageService.set('msgData',$scope.records);
+            $scope.text = "";
+        }
+        else{
+            return;
+        }
+       
+
+        
   }
+
 
 });
 
