@@ -23,9 +23,9 @@ app.controller("myCtrl",function($scope, localStorageService, $window){
     
     
     
-    // var msgData = localStorageService.get('msgData');
-    // $scope.records = msgData || [];
-    $scope.records = [];
+    var msgData = localStorageService.get('msgData');
+    $scope.records = msgData || [];
+    // $scope.records = [];
     $scope.text;
     $scope.isTyping = false;
     $scope.func = function(text){
@@ -46,8 +46,9 @@ app.controller("myCtrl",function($scope, localStorageService, $window){
             }).catch( function(err) {
                 console.log(err)
             })
-            // localStorageService.set('msgData',$scope.records);
-            $scope.text = "";
+             localStorageService.set('msgData',$scope.records);
+             $scope.text = "";
+
         }
         else{
             return;
@@ -106,6 +107,6 @@ app.config(['$routeProvider', function($routeProvider) {
     })
     .when("/max", {
         templateUrl : "templates/connectingCard.html",
-        controller: "cardCtrl"     
+            
     })
 }]);
