@@ -1,5 +1,4 @@
-var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule']);
-
+var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule','ngRoute']);
 app.config(function (localStorageServiceProvider) {
   localStorageServiceProvider
     .setPrefix('chat');
@@ -66,3 +65,36 @@ app.directive('ngEnter', function() {
             });
         };
     });
+
+// Directive part
+
+app.directive('chatCard', function(){
+    return{
+    restrict:'E',
+    templateUrl: 'templates/connectingCard.html',
+    controller: function($scope, $location) {
+        $scope.class = "chat_space";
+        console.log()
+        $scope.changeClass = function(){
+            if ($scope.class === "chat_space" && $location.url() == '/max')
+              $scope.class = "chat_max";
+            else
+              $scope.class = "chat_space";
+          };
+
+    },
+    controllerAS: "chatCard"
+     };
+});
+
+app.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "templates/chat.html",
+        controller: "myCtrl"
+    })
+    .when("/max", {
+        templateUrl : "templates/connectingCard.html",
+        controller: "myCtrl"     
+    })
+}]);
