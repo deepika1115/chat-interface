@@ -4,7 +4,7 @@ app.config(function (localStorageServiceProvider) {
     .setPrefix('chat');
 }); 
 
-app.controller("myCtrl",function($scope, localStorageService, $window){
+app.controller("myCtrl",function($scope, localStorageService, $window,$interval){
 	$scope.today = new Date(); 
 
     var client = new ApiAi.ApiAiClient({accessToken: '0193cf9c63c14b3188633ea7315deb91'});
@@ -40,15 +40,19 @@ app.controller("myCtrl",function($scope, localStorageService, $window){
                     type : "s",
                     data : botSays.result.fulfillment.messages[0].speech
                 })
+                localStorageService.set('msgData',$scope.records);
                 $scope.isTyping = false;
                 $scope.$apply();
                 console.log(botSays.result.fulfillment.messages[0].speech)
             }).catch( function(err) {
                 console.log(err)
             })
-             localStorageService.set('msgData',$scope.records);
+            
              $scope.text = "";
-
+              $interval(function () {
+                  $scope.updateScroll();
+              }, 1000);
+             
         }
         else{
             return;
@@ -57,7 +61,10 @@ app.controller("myCtrl",function($scope, localStorageService, $window){
 
         
   }
-
+  $scope.updateScroll = function(){
+    var elem = document.getElementById("scrollDiv");
+    elem.scrollTop = elem.scrollHeight;
+  }
 
 });
 

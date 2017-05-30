@@ -175,7 +175,7 @@ padding: 5px;
 background-color: lightgreen;
 border-radius: 9%;
 min-width: 140px;
-margin-left: 20% !important;   
+margin-left: 30% !important;   
 padding: 5px;
 }
 .bottom_icon_space{
@@ -188,18 +188,18 @@ font-style: italic;
 .chat_max{ 
     font-size:15px; 
     color:#707173;  
-    overflow-y: scroll; 
+    overflow: auto;
     height:500px; 
 }
 .chat_space{ 
-    font-size:15px; 
-    color:#707173;  
-    overflow-y: scroll; 
-    height:200px !important; 
+    font-size: 15px; 
+    color: #707173;  
+    overflow: auto; 
+    height: 200px !important; 
 }
 .chat_default{
     height: 560px;
-    overflow-y: scroll;
+    overflow: auto;
 }
 /*
 @media (max-width: 960px) {
