@@ -4,10 +4,10 @@ app.config(function (localStorageServiceProvider) {
     .setPrefix('chat');
 }); 
 
-app.controller("myCtrl",function($scope, localStorageService, $window,$interval){
+app.controller("myCtrl",function($scope, localStorageService, $window,$interval, $http){
 	$scope.today = new Date(); 
 
-    var client = new ApiAi.ApiAiClient({accessToken: '0193cf9c63c14b3188633ea7315deb91'});
+    //var client = new ApiAi.ApiAiClient({accessToken: '0193cf9c63c14b3188633ea7315deb91'});
 
 	var localData = localStorageService.get('localData');
     $scope.data = localData || {
@@ -30,28 +30,66 @@ app.controller("myCtrl",function($scope, localStorageService, $window,$interval)
     $scope.isTyping = false;
     $scope.func = function(text){
         $scope.isTyping = true;
+        var token = '0193cf9c63c14b3188633ea7315deb91';
         if(text && text != ""){
             $scope.records.push({ 
                 type : "c",
                 data : text
             });
-            client.textRequest(text).then( function(botSays) {
+            var ob = {
+                method: 'POST',
+                url: 'https://api.api.ai/v1/query?v=20150910',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                data: {
+                    "query": [
+                        $scope.text
+                    ],
+                    "contexts": [{
+                        "name": "",
+                        "lifespan": 4
+                    }],
+                    "location": {
+                        "latitude": 37.459157,
+                        "longitude": -122.17926
+                    },
+                    "timezone": "India/Delhi",
+                    "lang": "en",
+                    "sessionId": "1234567890"
+                }
+            }
+            $http(ob).then( function(resp) {
+                console.log(resp);
                 $scope.records.push({
                     type : "s",
-                    data : botSays.result.fulfillment.messages[0].speech
-                })
-                localStorageService.set('msgData',$scope.records);
-                $scope.isTyping = false;
-                $scope.$apply();
-                console.log(botSays.result.fulfillment.messages[0].speech)
-            }).catch( function(err) {
-                console.log(err)
+                    data : resp.data.result.fulfillment.speech
+                
             })
+                 localStorageService.set('msgData',$scope.records);
+                 $scope.isTyping = false;
+
+            })
+            // client.textRequest(text).then( function(botSays) {
+            //     $scope.records.push({
+            //         type : "s",
+            //         data : botSays.result.fulfillment.messages[0].speech
+
+            //     })
+                
+           
+            
+           
+            //     console.log(botSays.result.fulfillment.messages[0].speech)
+            // }).catch( function(err) {
+            //     console.log(err)
+            // })
             
              $scope.text = "";
-              $interval(function () {
+              
                   $scope.updateScroll();
-              }, 1000);
+              
              
         }
         else{
@@ -86,6 +124,7 @@ app.directive('ngEnter', function() {
 
 app.directive('chatCard', function(){
     return{
+        
     restrict:'E',
     templateUrl: 'templates/connectingCard.html',
     link : function(scope, element, attrs) {
@@ -100,8 +139,9 @@ app.directive('chatCard', function(){
             else
               $scope.class = "chat_space";
           };
-
-    },
+          // other function of chat.js
+          
+          },
     controllerAS: "chatCard"
      };
 });
