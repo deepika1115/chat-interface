@@ -67,7 +67,7 @@ app.controller("myCtrl",function($scope, localStorageService, $window,$interval,
                     data : resp.data.result.fulfillment.speech
                 
             })
-                 localStorageService.set('msgData',$scope.records);
+                localStorageService.set('msgData',$scope.records);
                  $scope.isTyping = false;
 
             })
