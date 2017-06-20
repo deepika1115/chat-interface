@@ -30,7 +30,6 @@ handlers:
 - url: /style
   static_dir: static/style
  
-- url: /target
-  static_dir: static/target
+
 
 
