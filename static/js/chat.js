@@ -6,13 +6,12 @@ app.config(function (localStorageServiceProvider, $httpProvider) {
     .setPrefix('chat');
 }); 
 
-app.controller("myCtrl",['$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray',function($scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray){
+app.controller("myCtrl",['$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth',function($scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth){
 	
 var initialdataloaded = false;
 
-
+//var auth = $firebaseAuth();
     $scope.today = new Date(); 
-
 
 	var localData = localStorageService.get('localData');
     $scope.data = localData || {
@@ -24,7 +23,9 @@ var initialdataloaded = false;
 
 	$scope.save = function() {
 		localStorageService.set('localData',$scope.data);
-	}
+	console.log($scope.data.email)
+    }
+
     
     
     
@@ -61,7 +62,7 @@ var initialdataloaded = false;
                     },
                     "timezone": "India/Delhi",
                     "lang": "en",
-                    "sessionId": "1234567890"
+                    "sessionId": $scope.data.email
                 }
             }
             $http(ob).then( function(resp) {
@@ -114,13 +115,16 @@ var initialdataloaded = false;
             if(initialdataloaded){
             console.log(requestSnapshot.val().message);
             console.log($scope.records)
-            $scope.records.push({ 
-                type : "r",
-                data : requestSnapshot.val().message
-            })
-            $scope.$digest();
+                if(requestSnapshot.val().session_id == $scope.data.email){
+                    $scope.records.push({ 
+                        type : "r",
+                        data : requestSnapshot.val().message
+                    })
+                    localStorageService.set('msgData',$scope.records);
+                    $scope.$digest();
 
-        }
+                }
+            }   
     });
 
     ref.once('value', function(snapshot){
