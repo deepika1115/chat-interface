@@ -48,6 +48,7 @@ app.controller("myCtrl",function($scope, localStorageService, $window){
             })
              localStorageService.set('msgData',$scope.records);
              $scope.text = "";
+             
 
         }
         else{

@@ -168,15 +168,17 @@ font-size: 15px;
 .chat_message{
 background-color: antiquewhite;
 border-radius: 9%;
+max-width: 200px;
 min-width: 140px;
 padding: 5px;
 }
 .chat_server_message{
 background-color: lightgreen;
 border-radius: 9%;
+max-width: 200px;
 min-width: 140px;
-margin-left: 20% !important;   
-padding: 5px;
+/*margin-left: 83% !important;   
+*/padding: 5px;
 }
 .bottom_icon_space{
 height:10%;
@@ -186,28 +188,33 @@ font-style: italic;
 
 }
 
-.chat_space{ 
+.chat_max{ 
     font-size:15px; 
     color:#707173;  
-    overflow-y: scroll; 
-    height:200px !important; 
+    overflow: auto;
+    height:500px; 
+}
+.chat_space{ 
+    font-size: 15px; 
+    color: #707173;  
+    overflow: auto; 
+    height: 200px !important; 
 }
 .chat_default{
      font-size:15px; 
     color:#707173;  
     height: 560px;
-    overflow-y: scroll;
+    overflow: auto;
 }
-/*
+
 @media (max-width: 960px) {
-    .card_position {
+    .chat_server_message {
         right: 0%;
     }
 }
 
 @media (max-width: 600px) {
-    .card_position {
+    .chat_server_message{
         right: 0%;
     }
 }
-*/
