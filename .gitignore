@@ -1,2 +1,14 @@
+.DS_Store
+*.swp
+*.pyc
+env/
+pip-log.txt
 node_modules/
+requests-1.2.3.dist-info/
+requests/
+python_firebase.egg-info/
+src/
+firebase/
 npm-debug.log
+packages.txt
+setup.py

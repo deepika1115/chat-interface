@@ -6,8 +6,7 @@ app.config(function (localStorageServiceProvider, $httpProvider) {
     .setPrefix('chat');
 }); 
 
-app.controller("myCtrl",['$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray',function($scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray){
-
+app.controller("myCtrl",['$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth',function($scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth){
 	
 var initialdataloaded = false;
 
@@ -70,19 +69,20 @@ var initialdataloaded = false;
                 console.log(resp);
                 $scope.records.push({
                     type : "s",
-
-                    data : resp.data.result.fulfillment.message.speech
-                })
-                $scope.isTyping = false;
-                console.log(resp.result.fulfillment.messages.speech)
-            }).catch( function(err) {
-                console.log(err)
+                    data : resp.data.result.fulfillment.speech
+                
             })
-             localStorageService.set('msgData',$scope.records);
+                localStorageService.set('msgData',$scope.records);
+                 $scope.isTyping = false;
+
+            })
+            
+            
              $scope.text = "";
-
-                   
-
+              
+                  $scope.updateScroll();
+              
+             
         }
         else{
             return;
@@ -91,7 +91,10 @@ var initialdataloaded = false;
 
         
   }
-
+  $scope.updateScroll = function(){
+    var elem = document.getElementById("scrollDiv");
+    elem.scrollTop = elem.scrollHeight;
+  }
 
   var ref = firebase.database().ref();
     // var ref = new Firebase('https://chat-interface1.firebaseio.com/');
@@ -184,7 +187,7 @@ app.directive('chatCard', function(){
         console.log()
         $scope.changeClass = function(){
             if ($scope.class === "chat_space" && $location.url() == '/max')
-              $scope.class = "chat_default";
+              $scope.class = "chat_max";
             else
               $scope.class = "chat_space";
           };
