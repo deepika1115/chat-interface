@@ -20,7 +20,7 @@
          <span class="welcome_messege">Welcome to LivePerson!</span>
          <span class="welcome_messege">A representative will be with you shortly.</span>
       </div>
-      <div id="scrollDiv" onload="updateScroll()" layout="column" layout-align="start start" layout-margin ng-class="class" class="chat_default">
+      <div id="scrollDiv" onload="updateScroll()" layout="column" layout-margin ng-class="class" class="chat_default" style="width: 100%">
          <div ng-repeat='msg in records track by $index' ng-class="msg.type == 'c' ? 'chat_message' : 'chat_server_message'">
          {{msg.data}} 
          </div>
