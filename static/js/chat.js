@@ -1,7 +1,6 @@
 var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule','ngRoute','firebase']);
 app.config(function (localStorageServiceProvider, $httpProvider) {
-    // $httpProvider.defaults.useXDomain = true;
-    // delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    
   localStorageServiceProvider
     .setPrefix('chat');
 }); 
@@ -10,7 +9,6 @@ app.controller("myCtrl",['$scope', 'localStorageService', '$window','$interval',
 	
 var initialdataloaded = false;
 
-//var auth = $firebaseAuth();
     $scope.today = new Date(); 
 
 	var localData = localStorageService.get('localData');
@@ -26,15 +24,12 @@ var initialdataloaded = false;
 	console.log($scope.data.email)
     }
 
-    
-    
-    
     var msgData = localStorageService.get('msgData');
     $scope.records = msgData || [];
     // $scope.records = [];
     $scope.text;
     $scope.isTyping = false;
-    $scope.func = function(text){
+    $scope.func = function(text){       //func for posting data to api.ai and pushing clients and server data in array
         $scope.isTyping = true;
         var token = '0193cf9c63c14b3188633ea7315deb91';
         if(text && text != ""){
@@ -87,28 +82,17 @@ var initialdataloaded = false;
         else{
             return;
         }
-       
-
-        
-  }
+    }
+  
+// make scroll down when new msg entered
   $scope.updateScroll = function(){
     var elem = document.getElementById("scrollDiv");
     elem.scrollTop = elem.scrollHeight;
   }
 
+
+// firebase connection
   var ref = firebase.database().ref();
-    // var ref = new Firebase('https://chat-interface1.firebaseio.com/');
-    // var obj = $firebaseObject(ref);
-    // var playersRef = ref.child("chat-interface1");
-
-    // var playersKey = playersRef.key();
-    // console.log(playersKey);
-   
-
-    // var obj = $firebaseArray(ref);
-    // obj.$loaded().then(function() {
-    // console.log(Object.keys(obj[0]).length);
-    
     var ref = firebase.database().ref('chat-interface1/')
     ref.on("child_added",function(requestSnapshot){
             //console.log(childsnapshot);
@@ -131,33 +115,10 @@ var initialdataloaded = false;
         initialdataloaded = true;
     })
 
-    // ref.orderByChild("notify").equalTo(1).limitToLast(1).on("child_added",function(){
-    //     if(snapshot.val().notify == 1){
-    //         console.log(snapshot.val().message.notify)
-    //     }
-    // });
-
-        
-        
-
-        // for (i in obj[0]){
-        //     console.log(i);
-        //     var ref = firebase.database().ref("chat-interface1/" + i).once('value').then(function(snapshot) {
-        //         console.log(snapshot.val().message);
-            //     $scope.records.push({ 
-            //     type : "r",
-            //     data : snapshot.val().message
-            // })
-        //     });
-            
-        // }
-     // angular.forEach(obj, function(value, key) {
-     //      console.log(key, value);
-     //   });
-  // });
-
 }]);
 
+
+//directive for ngenter
 app.directive('ngEnter', function() {
         return function(scope, element, attrs) {
             element.bind("keydown keypress", function(event) {
@@ -171,6 +132,7 @@ app.directive('ngEnter', function() {
             });
         };
     });
+
 
 // Directive part
 
