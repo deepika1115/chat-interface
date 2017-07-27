@@ -1,52 +1,47 @@
 <!DOCTYPE html>
 <html>
-
-   <head>
-      <title></title>
+    <head>
       <meta charset="UTF-8" name=viewport content="width=device-width, initial-scale=1">
-      <link href="style/chat.css" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="style/chat.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
       <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-   </head>
-   <body ng-app="myApp" ng-controller="myCtrl">
-        
-        <div ng-view></div>
-        
-        <!-- Angular Material requires Angular.js Libraries -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-        <!-- Angular Material Library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-        <!--local storage libraray-->
-        <script src="static/js/bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-        <!-- Routing libraray -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-        <!-- <script src="target/ApiAi.js"></script> -->
-       
-       <!-- <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script> -->
-        <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-        <script>
-          //Initialize Firebase
-          var config = {
-            apiKey: "AIzaSyBYFpiIPeBz69p0CSJ92I3iC218t3yiQgk",
-            authDomain: "chat-interface1.firebaseapp.com",
-            databaseURL: "https://chat-interface1.firebaseio.com",
-            projectId: "chat-interface1",
-            storageBucket: "",
-            messagingSenderId: "1082863785331"
-          };
-          firebase.initializeApp(config);
-        </script>
-        <!-- <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-        <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script> -->
-        
-        <!-- <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script> -->
-        
-        <!-- <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/0.9.1/angularfire.js"></script> -->
-        <script src="static/js/chat.js"></script>
+
+      <!-- The Scripts -->
+      <!-- AngularJS and Angular Material's libraries -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+      <!-- Angular Material library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+      <!--Local Storage libraray-->
+      <script src="js/bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+      <!-- Routing libraray -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+      <!-- Firebase library -->
+      <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+
+      <!-- <script src="target/ApiAi.js"></script> -->
+      <!-- Initialize Firebase -->
+      <script>
+        var config = {
+          apiKey: "AIzaSyBYFpiIPeBz69p0CSJ92I3iC218t3yiQgk",
+          authDomain: "chat-interface1.firebaseapp.com",
+          databaseURL: "https://chat-interface1.firebaseio.com",
+          projectId: "chat-interface1",
+          storageBucket: "",
+          messagingSenderId: "1082863785331"
+        };
+        firebase.initializeApp(config);
+      </script>
+      
+      <script src="js/chat.js"></script>
+
+    </head>
+    <body ng-app="myApp" ng-controller="myCtrl">
+      <div ng-view></div>
+      
+
    </body>
 </html>

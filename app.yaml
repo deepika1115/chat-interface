@@ -3,6 +3,7 @@ version: 10
 runtime: python27
 api_version: 1
 threadsafe: true
+
 handlers: 
 - url: /
   static_files: home.html
@@ -13,7 +14,7 @@ handlers:
   static_files: connectingCard.html
   upload: connectingCard.html
 
-- url: /static/js
+- url: /js
   static_dir: static/js
   secure: always
   
@@ -22,16 +23,13 @@ handlers:
 
 - url: /templates
   static_dir: static/templates
-  
-- url: /libs
-  static_dir: static/libs
-  secure: always
 
 - url: /style
   static_dir: static/style
 
+- url: /libs
+  static_dir: static/libs
+  secure: always
+
 - url: /.*
-  script: main.app 
-
-
-
+  script: main.app

@@ -8,9 +8,11 @@ import logging
 import requests
 from firebase import Firebase
 
+
 class MainPage(webapp2.RequestHandler):
     
     def post(self):
+
         self.response.headers['Content-type'] = 'application/json'
         
         #getting data from api.ai
@@ -22,6 +24,8 @@ class MainPage(webapp2.RequestHandler):
         obj = {
         "text": '*SESSION ID:* ' + session_id +' ' + data
         }
+
+
 
         #sending ob to api.ai as response
         ob = {
