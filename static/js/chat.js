@@ -1,15 +1,22 @@
 var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule','ngRoute','firebase']);
-app.config(function (localStorageServiceProvider, $httpProvider) {
-    
+
+app.config(function (localStorageServiceProvider, $httpProvider, $mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+    .primaryPalette('light-green')
+    .accentPalette('deep-orange');
+
   localStorageServiceProvider
     .setPrefix('chat');
 }); 
 
 app.controller("myCtrl",['$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth',function($scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth){
 	
+    
 var initialdataloaded = false;
 
     $scope.today = new Date(); 
+    $scope.chat = new Date(); 
+
 
 	var localData = localStorageService.get('localData');
     $scope.data = localData || {

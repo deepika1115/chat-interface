@@ -1,0 +1,96 @@
+.chat_icon {
+  margin-left: 2px;
+  color: white;
+}
+
+.card_position {
+  position: fixed;
+  bottom: 2%;
+  right: 0%;
+  z-index: 1;
+  width: 300px;
+}
+.card_position .minimise {
+  position: fixed;
+  right: 0%;
+  z-index: 1;
+  width: 300px;
+  bottom: 2%;
+}
+.card_position .remove_icon {
+  margin-top: 12px;
+}
+.card_position .validation {
+  font-size: 10px;
+  color: red;
+}
+.card_position .input_box_style {
+  font-style: italic;
+}
+.card_position .input_box_style {
+  font-style: italic;
+}
+
+.chat_button {
+  position: fixed !important;
+  bottom: 0;
+  right: 0%;
+  z-index: 0 !important;
+}
+
+.card_height {
+  height: 91px;
+  max-height: 100%;
+}
+
+.chat_space {
+  font-size: 15px;
+  overflow: auto;
+  height: 260px !important;
+}
+
+.chat_max {
+  font-size: 15px;
+  overflow: auto;
+  height: 500px;
+}
+
+.date_size {
+  font-size: 10px;
+}
+
+.welcome_messege {
+  text-align: center;
+  font-size: 12px;
+}
+
+.chat_message {
+  background-color: #b1afaf;
+  border-radius: 9%;
+  padding: 5px;
+  display: table;
+  min-width: 50px;
+  max-width: 50%;
+}
+
+.chat_server_message {
+  background-color: #9ac77a;
+  border-radius: 9%;
+  padding: 5px;
+  display: table;
+  margin-left: auto !important;
+  min-width: 50px;
+}
+
+.chat_date_size {
+  font-size: 10px;
+  margin-top: 6px;
+  float: right;
+  margin-left: 12px;
+}
+
+.chat_default {
+  height: 600px;
+}
+
+/*# sourceMappingURL=style.css.map */
