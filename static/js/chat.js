@@ -10,25 +10,31 @@ app.config(function (localStorageServiceProvider, $httpProvider, $mdThemingProvi
 }); 
 
 app.controller("myCtrl",['$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth',function($scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth){
-	
-    
 var initialdataloaded = false;
 
     $scope.today = new Date(); 
     $scope.chat = new Date(); 
 
 
-	var localData = localStorageService.get('localData');
+    var localData = localStorageService.get('localData');
     $scope.data = localData || {
-		myName : "",
-		email : "",
-		company : ""
-	}
+        myName : "",
+        email : "",
+        company : ""
+    }
+
+    $scope.showThis = {}
+    $scope.show = function(which, that){
+        $scope.showThis[which] = that
+    }
+    $scope.show('registerView', true);
+    $scope.save = function() {
+        localStorageService.set('localData',$scope.data);
+        console.log($scope.data.email)
+        $scope.show('registerView', false);
+        $scope.show('chatView', true);
 
 
-	$scope.save = function() {
-		localStorageService.set('localData',$scope.data);
-	console.log($scope.data.email)
     }
 
     var msgData = localStorageService.get('msgData');
@@ -169,12 +175,12 @@ app.directive('chatCard', function(){
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-    .when("/", {
-        templateUrl : "templates/chat.html",
-        controller: "myCtrl"
-    })
-    .when("/max", {
-        templateUrl : "templates/connectingCard.html",
-            
+     .when("/", {
+       templateUrl : "templates/chat.html",
+       controller: "myCtrl"
+     })
+     .when("/max", {
+       templateUrl : "templates/connectingCard.html",
     })
 }]);
+
