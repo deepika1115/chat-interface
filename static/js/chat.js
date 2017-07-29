@@ -1,4 +1,39 @@
+var env = {};
+
+// Import variables if present (from env.js)
+if(window){  
+  Object.assign(env, window.__env);
+}
+
+
+
+
 var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule','ngRoute','firebase']);
+
+// Register environment in AngularJS as constant
+app.constant('__env', env);
+//make environment available in angular  
+function logEnvironment($log, __env){
+    $log.debug('Environment variables:');
+    $log.debug(__env)
+}
+  
+logEnvironment.$inject = ['$log', '__env'];
+  
+app.run(logEnvironment);
+
+// function disableLogging($logProvider, __env){  
+//   $logProvider.debugEnabled(__env.enableDebug);
+// }
+
+// // Inject dependencies
+// disableLogging.$inject = ['$logProvider', '__env'];
+
+// app.config(disableLogging);  
+
+
+
+
 app.config(function (localStorageServiceProvider, $httpProvider) {
     
   localStorageServiceProvider
@@ -39,7 +74,7 @@ var initialdataloaded = false;
     $scope.isTyping = false;
     $scope.func = function(text){       //func for posting data to api.ai and pushing clients and server data in array
         $scope.isTyping = true;
-        var token = '0193cf9c63c14b3188633ea7315deb91';
+        var token = __env.token;
         if(text && text != ""){
             $scope.records.push({ 
                 type : "c",
@@ -47,7 +82,7 @@ var initialdataloaded = false;
             });
             var ob = {
                 method: 'POST',
-                url: 'https://api.api.ai/v1/query?v=20150910',
+                url: __env.apiUrl,
                 headers: {
                     'Authorization': 'Bearer ' + token,
                         },
