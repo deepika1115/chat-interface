@@ -11,7 +11,7 @@ bottom: 0;
 width: 100%;
 margin-right: 40px;
 }
-*/#footer ul li{display:inline;
+*//*#footer ul li{display:inline;
 padding: 0 8%;
 } 
 img{
@@ -22,11 +22,11 @@ md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:
 background-color: orange;
 }
 div.relative {
-position: relative;
+position: relative;*/
 /*width: 400px;
 height: 200px;
 border: 3px solid #73AD21;*/
-} 
+/*} 
 div.absolute {
 position: absolute;
 right: 20px;
@@ -201,7 +201,7 @@ font-style: italic;
 .chat_default{
     height: 560px;
     overflow: auto;
-}
+}*/
 /*
 @media (max-width: 960px) {
     .card_position {

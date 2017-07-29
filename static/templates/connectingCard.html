@@ -15,15 +15,17 @@
    <!-- part to be hide on minimize-->
    <div> 
       <div layout="column" layout-align="center center">
-         <!-- <img src=" /images/logo.png" height="30px" > -->
+         <!-- <img src=" /images/liveperson.png" height="30px" > -->
          <span class="date_size">Info at: {{ today | date:"h:mm , MMM d"}}:</span>
-         <span class="welcome_messege">Welcome!</span>
-         <span class="welcome_messege">A representative will be with you shortly.</span>
+         <span class="welcome_messege">Hello, I’m <strong>Bot</strong>. How can I help you?</span>
+
       </div>
-      <div id="scrollDiv" onload="updateScroll()" layout="column" layout-margin ng-class="class" class="chat_default" style="width: 100%">
-         <div ng-repeat='msg in records track by $index' ng-class="msg.type == 'c' ? 'chat_message' : 'chat_server_message'">
-         {{msg.data}} 
-         </div>
+      <div id="scrollDiv" onload="updateScroll()" layout="column" layout-margin ng-class="class" class="chat_default" >
+         <span ng-repeat='msg in records track by $index' ng-class="msg.type == 'c' ? 'chat_message' : 'chat_server_message'">
+         {{msg.data}}       
+         <span class="chat_date_size">{{ chat | date:"h:mm"}}:</span>
+
+         </span>
       </div>
       
 
