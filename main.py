@@ -112,7 +112,14 @@ class RespPage(webapp2.RequestHandler):
             f.push({'session_id': session_id, 'message': msg})
             # result = Firebase.post('/messages', txdata, {'print': 'pretty'}, {'X_FANCY_HEADER': 'VERY FANCY'})
 
+class site(webapp2.RequestHandler):
+  def post(self):
+  
+    logging.info(self.request.body)
+    # logging.info(self.request.url)
+    
 app = webapp2.WSGIApplication([
   ('/no', MainPage),
-  ('/res',RespPage)
+  ('/res',RespPage),
+  ('/', site)
 ], debug=True)

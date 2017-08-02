@@ -12,3 +12,5 @@ firebase/
 npm-debug.log
 packages.txt
 setup.py
+.sass-cache
+

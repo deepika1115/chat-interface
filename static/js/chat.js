@@ -44,9 +44,26 @@ app.config(function (localStorageServiceProvider, $httpProvider, $mdThemingProvi
     .setPrefix('chat');
 }); 
 
-app.controller("myCtrl",['$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth',function($scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth){
+app.controller("myCtrl",['$location', '$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth',function($location, $scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth){
 var initialdataloaded = false;
 
+
+    var filters = $location.search();
+      if(filters) {
+        var req = {
+            method: 'POST',
+            url: '/',
+            headers: {
+
+                    },
+            data: {
+                "filters": filters,
+            }
+        }
+        $http(req).then(function(){
+        
+        })
+    }
     $scope.today = new Date(); 
     $scope.chat = new Date(); 
 
