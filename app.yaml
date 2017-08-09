@@ -5,7 +5,13 @@ api_version: 1
 threadsafe: true
 
 handlers: 
+
 - url: /
+  static_files: client_info.html
+  upload: client_info.html
+  secure: always
+
+- url: /chatService
   static_files: home.html
   upload: home.html
   secure: always
@@ -33,3 +39,7 @@ handlers:
 
 - url: /.*
   script: main.app
+
+libraries:
+- name: ssl
+  version: "2.7"

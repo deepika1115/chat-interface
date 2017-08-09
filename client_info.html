@@ -1,0 +1,18 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script type="text/javascript" src="js/info.js"></script>
+	<h1>Enter your details</h1>
+
+</head>
+<body ng-app="chatApp" ng-controller="chatCtrl">
+<form method="POST">
+	website name:<input type="text" ng-model="webname"><br><br>
+	website url:<input type="text" ng-model="weburl"><br><br>
+	bot token:<input type="text" ng-model="token"><br><br>
+	slack url:<input type="text" ng-model="slackurl"><br><br>
+
+	<button ng-click="submit()">submit</button>
+</form>
+</body>
+</html>

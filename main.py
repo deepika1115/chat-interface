@@ -6,8 +6,24 @@ import json
 import urllib2
 import logging
 import requests
-from firebase import Firebase
+import model
+# from firebase import Firebase
+from firebase.firebase import FirebaseApplication
 
+class datastorage(webapp2.RequestHandler):
+  def post(self):
+    logging.info(self.request.body)
+    logging.info(json.loads(self.request.body))
+    d=json.loads(self.request.body)
+    logging.info(d)
+    getdata = model.chatClients()
+
+    getdata.website_name=d['website_name']
+    getdata.website_url=d['website_url']
+    getdata.slack_url=d['slack_url']
+    getdata.bot_token=d['bot_token']
+    z_key=getdata.put()
+    # print chatClients._query().fetch()
 
 class MainPage(webapp2.RequestHandler):
     
@@ -108,18 +124,21 @@ class RespPage(webapp2.RequestHandler):
             msg = rdata[2]
             
             logging.info(slack_data)
-            f = Firebase('https://chat-interface1.Firebaseio.com/chat-interface1')
-            f.push({'session_id': session_id, 'message': msg})
+            logging.info(session_id)
+            logging.info(msg)
+            f = FirebaseApplication('https://chat-interface1.Firebaseio.com', None)
+            # f.push({'session_id': session_id, 'message': msg})
+            f.post('/chat-interface1', {'session_id': session_id, 'message': msg})
             # result = Firebase.post('/messages', txdata, {'print': 'pretty'}, {'X_FANCY_HEADER': 'VERY FANCY'})
 
 class site(webapp2.RequestHandler):
   def post(self):
-  
-    logging.info(self.request.body)
-    # logging.info(self.request.url)
+    currentUrl = json.loads(self.request.body)['filters']['url']
+    logging.info(currentUrl)
     
 app = webapp2.WSGIApplication([
+  ('/update/', datastorage),
   ('/no', MainPage),
   ('/res',RespPage),
-  ('/', site)
+  ('/currentUrl', site)
 ], debug=True)

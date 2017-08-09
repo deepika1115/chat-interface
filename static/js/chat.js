@@ -52,12 +52,12 @@ var initialdataloaded = false;
       if(filters) {
         var req = {
             method: 'POST',
-            url: '/',
+            url: '/currentUrl',
             headers: {
-
+                "Content-Type": "application/json"    
                     },
             data: {
-                "filters": filters,
+                "filters": filters
             }
         }
         $http(req).then(function(){
