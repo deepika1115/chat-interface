@@ -48,22 +48,32 @@ app.controller("myCtrl",['$location', '$scope', 'localStorageService', '$window'
 var initialdataloaded = false;
 
 
-    var filters = $location.search();
-      if(filters) {
-        var req = {
+    var url = $location.search();
+      if(url) {
+        var req1 = {
             method: 'POST',
-            url: '/currentUrl',
+            url: '/no',
             headers: {
                 "Content-Type": "application/json"    
                     },
-            data: {
-                "filters": filters
-            }
+            data: url
         }
-        $http(req).then(function(){
-        
+        var req2 = {
+            method: 'POST',
+            url: '/res',
+            headers: {
+                "Content-Type": "application/json"    
+                    },
+            data: url
+        }
+        $http(req1).then(function(resp){
+            console.log(resp);
+        })
+        $http(req2).then(function(resp){
+            console.log(resp);
         })
     }
+
     $scope.today = new Date(); 
     $scope.chat = new Date(); 
 
