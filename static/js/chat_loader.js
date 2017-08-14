@@ -20,9 +20,9 @@ function button(show) {
 	frame.style.visibility = 'hidden';
 	div.appendChild(frame);
 
-var style = "line-height: 5rem; width: 5rem;height: 5rem; border-radius: 50%; \
-\font-size: 16px; text-align: center; text-transform: uppercase; text-decoration:none; \
- background-color: #ff7200; border: none; outline: none; cursor: pointer"
+var style = "line-height: 5rem; width: 5rem;height: 5rem; border-radius: 50%;" +
+"font-size: 16px; text-align: center; text-transform: uppercase; text-decoration:none;" +
+ "background-color: #ff7200; border: none; outline: none; cursor: pointer"
 
 
 

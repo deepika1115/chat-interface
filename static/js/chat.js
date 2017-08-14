@@ -122,10 +122,20 @@ var initialdataloaded = false;
                     "query": [
                         $scope.text
                     ],
-                    "contexts": [{
-                        "name": "",
-                        "lifespan": 4
-                    }],
+                    "contexts": 
+                    [
+                        {
+                            "name": "",
+                            "lifespan": 4
+                        },
+                        {
+                            "name": "token",
+                            "parameters": {
+                                "token": token
+                                // "key": 'key'
+                            }
+                        }
+                    ],
                     "location": {
                         "latitude": 37.459157,
                         "longitude": -122.17926

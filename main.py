@@ -19,12 +19,14 @@ class datastorage(webapp2.RequestHandler):
     logging.info(json.loads(self.request.body))
     d=json.loads(self.request.body)
     logging.info(d)
-    getdata = model.chatClients()
+    getdata = model.ChatClients()
 
-    getdata.website_name=d['website_name']
-    getdata.website_url=d['website_url']
-    getdata.slack_url=d['slack_url']
-    getdata.bot_token=d['bot_token']
+    getdata.website_name=d['websiteName']
+    getdata.website_url=d['websiteUrl']
+    getdata.client_access_token=d['clientToken']
+    getdata.developer_access_token=d['developerToken']
+    getdata.slack_url=d['slackUrl']
+    
     z_key=getdata.put()
     
 
@@ -40,7 +42,7 @@ class MainPage(webapp2.RequestHandler):
     if 'url' in self.request.body:
       currentUrl = json.loads(self.request.body)['url']
       logging.info(currentUrl)
-    q = [p.to_dict() for p in model.chatClients().query(model.chatClients.website_url == currentUrl).fetch()]
+    q = [p.to_dict() for p in model.ChatClients().query(model.ChatClients.website_url == currentUrl).fetch()]
     logging.info(q)
     slackUrl = q[0]['slack_url']
     logging.info(slackUrl)
@@ -80,7 +82,7 @@ class RespPage(webapp2.RequestHandler):
       global currentUrl
       currentUrl = json.loads(self.request.body)['url']
       logging.info(currentUrl)
-    q = [p.to_dict() for p in model.chatClients().query(model.chatClients.website_url == currentUrl).fetch()]
+    q = [p.to_dict() for p in model.ChatClients().query(model.ChatClients.website_url == currentUrl).fetch()]
     logging.info(q)
     botToken = q[0]['bot_token']
     logging.info(botToken)
