@@ -16,5 +16,4 @@ app.controller('chatCtrl', function($scope,$http){
 	        console.log("inserted Successfully");
 	    });
 	}
-
 });

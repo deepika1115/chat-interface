@@ -1,9 +1,9 @@
-var env = {};
+// var env = {};
 
-// Import variables if present (from env.js)
-if(window){  
-  Object.assign(env, window.__env);
-}
+// // Import variables if present (from env.js)
+// if(window){  
+//   Object.assign(env, window.__env);
+// }
 
 
 
@@ -11,16 +11,16 @@ if(window){
 var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule','ngRoute','firebase']);
 
 // Register environment in AngularJS as constant
-app.constant('__env', env);
+// app.constant('__env', env);
 //make environment available in angular  
-function logEnvironment($log, __env){
-    $log.debug('Environment variables:');
-    $log.debug(__env)
-}
+// function logEnvironment($log, __env){
+//     $log.debug('Environment variables:');
+//     $log.debug(__env)
+// }
   
-logEnvironment.$inject = ['$log', '__env'];
+// logEnvironment.$inject = ['$log', '__env'];
   
-app.run(logEnvironment);
+// app.run(logEnvironment);
 
 // function disableLogging($logProvider, __env){  
 //   $logProvider.debugEnabled(__env.enableDebug);
@@ -47,30 +47,42 @@ app.config(function (localStorageServiceProvider, $httpProvider, $mdThemingProvi
 app.controller("myCtrl",['$location', '$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth',function($location, $scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth){
 var initialdataloaded = false;
 
-
+    var token;
     var url = $location.search();
       if(url) {
-        var req1 = {
+        // var req1 = {
+        //     method: 'POST',
+        //     url: '/apidata',
+        //     headers: {
+        //         "Content-Type": "application/json"    
+        //             },
+        //     data: url
+        // }
+        // var req2 = {
+        //     method: 'POST',
+        //     url: '/slackdata',
+        //     headers: {
+        //         "Content-Type": "application/json"    
+        //             },
+        //     data: url
+        // }
+        var req3 = {
             method: 'POST',
-            url: '/no',
+            url: '/current',
             headers: {
                 "Content-Type": "application/json"    
                     },
             data: url
         }
-        var req2 = {
-            method: 'POST',
-            url: '/res',
-            headers: {
-                "Content-Type": "application/json"    
-                    },
-            data: url
-        }
-        $http(req1).then(function(resp){
+        // $http(req1).then(function(resp){
+        //     console.log(resp);
+        // })
+        // $http(req2).then(function(resp){
+        //     console.log(resp);
+        // })
+        $http(req3).then(function(resp){
             console.log(resp);
-        })
-        $http(req2).then(function(resp){
-            console.log(resp);
+            token = resp.data.token;
         })
     }
 
@@ -106,7 +118,7 @@ var initialdataloaded = false;
     $scope.isTyping = false;
     $scope.func = function(text){       //func for posting data to api.ai and pushing clients and server data in array
         $scope.isTyping = true;
-        var token = __env.token;
+        // var token = __env.token;
         if(text && text != ""){
             $scope.records.push({ 
                 type : "c",
@@ -114,7 +126,7 @@ var initialdataloaded = false;
             });
             var ob = {
                 method: 'POST',
-                url: __env.apiUrl,
+                url: 'https://api.api.ai/v1/query?v=20150910',
                 headers: {
                     'Authorization': 'Bearer ' + token,
                         },

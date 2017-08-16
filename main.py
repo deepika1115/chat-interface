@@ -7,13 +7,14 @@ import cgi
 import webapp2
 import json
 import urllib2
+import urllib
 import logging
 import requests
 import model
 from firebase.firebase import FirebaseApplication
 
 # put data in ndb
-class datastorage(webapp2.RequestHandler):
+class Datastorage(webapp2.RequestHandler):
   def post(self):
     logging.info(self.request.body)
     logging.info(json.loads(self.request.body))
@@ -30,26 +31,49 @@ class datastorage(webapp2.RequestHandler):
     z_key=getdata.put()
     
 
-class MainPage(webapp2.RequestHandler):
+class CurrentHandler(webapp2.RequestHandler):
+  def post(self):
+    logging.info(self.request.body)
+    if 'url' in self.request.body:
+      currentUrl = json.loads(self.request.body)['url']
+      logging.info(currentUrl)
+      q = model.ChatClients().query(model.ChatClients.website_url == currentUrl).get()
+      token = q.client_access_token
+      logging.info(token)
+      obj = {
+        "token" : token
+      }
+      self.response.write(json.dumps(obj))
+
+
+class ApiHandler(webapp2.RequestHandler):
     
   def post(self):
     
-    global currentUrl
+    # global currentUrl
     self.response.headers['Content-type'] = 'application/json'
       
     #getting currentUrl from front end 
     logging.info(json.loads(self.request.body))
-    if 'url' in self.request.body:
-      currentUrl = json.loads(self.request.body)['url']
-      logging.info(currentUrl)
-    q = [p.to_dict() for p in model.ChatClients().query(model.ChatClients.website_url == currentUrl).fetch()]
-    logging.info(q)
-    slackUrl = q[0]['slack_url']
-    logging.info(slackUrl)
+    # if 'url' in self.request.body:
+    #   currentUrl = json.loads(self.request.body)['url']
+    #   logging.info(currentUrl)
+    # q = [p.to_dict() for p in model.ChatClients().query(model.ChatClients.website_url == currentUrl).fetch()]
+    # logging.info(q)
+    # slackUrl = q[0]['slack_url']
+    # logging.info(slackUrl)
     
     #getting data from api.ai
-    data = json.loads(self.request.body)['result']['resolvedQuery']
-    session_id = json.loads(self.request.body)['sessionId']
+    req = json.loads(self.request.body)
+    
+    data = req['result']['resolvedQuery']
+    logging.info(data)
+    session_id = req['sessionId']
+    logging.info(session_id)
+    token = req['result']['contexts'][0]['parameters']['token']
+    logging.info(token)
+    q = model.ChatClients().query(model.ChatClients.client_access_token == token).get()
+    slackUrl = q.slack_url
     
     #sending ob to api.ai as response
     ob = {
@@ -73,24 +97,25 @@ class MainPage(webapp2.RequestHandler):
   
 
 
-class RespPage(webapp2.RequestHandler):
+class SlackHandler(webapp2.RequestHandler):
 
   def post(self):
    
     #getting currentUrl from front end
-    if 'url' in self.request.body:
-      global currentUrl
-      currentUrl = json.loads(self.request.body)['url']
-      logging.info(currentUrl)
-    q = [p.to_dict() for p in model.ChatClients().query(model.ChatClients.website_url == currentUrl).fetch()]
-    logging.info(q)
-    botToken = q[0]['bot_token']
-    logging.info(botToken)
+    # if 'url' in self.request.body:
+    #   global currentUrl
+    #   currentUrl = json.loads(self.request.body)['url']
+    #   logging.info(currentUrl)
+    # q = [p.to_dict() for p in model.ChatClients().query(model.ChatClients.website_url == currentUrl).fetch()]
+    # logging.info(q)
+    # botToken = q[0]['bot_token']
+    # logging.info(botToken)
 
     #getting data from slack
     slack_data = dict(x.split('=') for x in self.request.body.split('&'))
     logging.info(slack_data)
     txdata = slack_data['text'].replace("+"," ")
+    # txdata = urllib.unquote(slack_data['text']).decode()
     logging.info(txdata)
     
     #sending data from slack to api.ai for faq or result text to firebase
@@ -156,13 +181,13 @@ class RespPage(webapp2.RequestHandler):
       logging.info(session_id)
       logging.info(msg)
       f = FirebaseApplication('https://chat-interface1.Firebaseio.com', None)
-      # f.push({'session_id': session_id, 'message': msg})
       f.post('/chat-interface1', {'session_id': session_id, 'message': msg})
       
 
     
 app = webapp2.WSGIApplication([
-  ('/update/', datastorage),
-  ('/no', MainPage),
-  ('/res',RespPage)
+  ('/update/', Datastorage),
+  ('/apidata', ApiHandler),
+  ('/slackdata',SlackHandler),
+  ('/current',CurrentHandler)
 ], debug=True)
