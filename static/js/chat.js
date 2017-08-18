@@ -1,39 +1,4 @@
-// var env = {};
-
-// // Import variables if present (from env.js)
-// if(window){  
-//   Object.assign(env, window.__env);
-// }
-
-
-
-
-var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule','ngRoute','firebase']);
-
-// Register environment in AngularJS as constant
-// app.constant('__env', env);
-//make environment available in angular  
-// function logEnvironment($log, __env){
-//     $log.debug('Environment variables:');
-//     $log.debug(__env)
-// }
-  
-// logEnvironment.$inject = ['$log', '__env'];
-  
-// app.run(logEnvironment);
-
-// function disableLogging($logProvider, __env){  
-//   $logProvider.debugEnabled(__env.enableDebug);
-// }
-
-// // Inject dependencies
-// disableLogging.$inject = ['$logProvider', '__env'];
-
-// app.config(disableLogging);  
-
-
-
-
+var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule','ngRoute','firebase', 'angular-google-gapi']);
 
     
 app.config(function (localStorageServiceProvider, $httpProvider, $mdThemingProvider) {
@@ -50,23 +15,8 @@ var initialdataloaded = false;
     var token;
     var url = $location.search();
       if(url) {
-        // var req1 = {
-        //     method: 'POST',
-        //     url: '/apidata',
-        //     headers: {
-        //         "Content-Type": "application/json"    
-        //             },
-        //     data: url
-        // }
-        // var req2 = {
-        //     method: 'POST',
-        //     url: '/slackdata',
-        //     headers: {
-        //         "Content-Type": "application/json"    
-        //             },
-        //     data: url
-        // }
-        var req3 = {
+        
+        var req = {
             method: 'POST',
             url: '/current',
             headers: {
@@ -74,13 +24,8 @@ var initialdataloaded = false;
                     },
             data: url
         }
-        // $http(req1).then(function(resp){
-        //     console.log(resp);
-        // })
-        // $http(req2).then(function(resp){
-        //     console.log(resp);
-        // })
-        $http(req3).then(function(resp){
+        
+        $http(req).then(function(resp){
             console.log(resp);
             token = resp.data.token;
         })
@@ -107,8 +52,6 @@ var initialdataloaded = false;
         console.log($scope.data.email)
         $scope.show('registerView', false);
         $scope.show('chatView', true);
-
-
     }
 
     var msgData = localStorageService.get('msgData');
@@ -118,7 +61,7 @@ var initialdataloaded = false;
     $scope.isTyping = false;
     $scope.func = function(text){       //func for posting data to api.ai and pushing clients and server data in array
         $scope.isTyping = true;
-        // var token = __env.token;
+
         if(text && text != ""){
             $scope.records.push({ 
                 type : "c",
@@ -267,4 +210,15 @@ app.config(['$routeProvider', function($routeProvider) {
        templateUrl : "templates/connectingCard.html",
     })
 }]);
+
+// app.service('apiLoaded', ['$q', 'GApi',function($q, GApi) {
+//     var app = {}
+
+//     app.init = function() {
+
+//     }
+//     gapi.clientHandle
+
+//     return app;
+// }])
 

@@ -37,9 +37,16 @@ handlers:
   static_dir: static/libs
   secure: always
 
-- url: /.*
-  script: main.app
+- url: /_ah/api/.*
+  script: apis.main.init
+
+builtins:
+- deferred: on
+- remote_api: on
 
 libraries:
 - name: ssl
   version: "2.7"
+
+# - name: endpoints
+#   version: 2.0

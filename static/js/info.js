@@ -4,11 +4,11 @@ app.controller('chatCtrl', function($scope,$http){
 	$scope.submit = function(){
 
 		var ChatClients = {
-		"websiteName" : $scope.webname,
-		"websiteUrl" : $scope.weburl,
-		"clientToken" : $scope.clientToken,
-		"developerToken" : $scope.developerToken,
-		"slackUrl" : $scope.slackUrl
+		"website_name" : $scope.webname,
+		"website_url" : $scope.weburl,
+		"client_token" : $scope.clientToken,
+		"developer_token" : $scope.developerToken,
+		"slack_url" : $scope.slackUrl
 		};
 		console.log(ChatClients);
 		$http.post("/update/",ChatClients)
