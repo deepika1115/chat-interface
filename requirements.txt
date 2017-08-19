@@ -1,2 +1,3 @@
 requests
 python-firebase
+google-endpoints
