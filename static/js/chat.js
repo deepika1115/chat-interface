@@ -9,27 +9,38 @@ app.config(function (localStorageServiceProvider, $httpProvider, $mdThemingProvi
     .setPrefix('chat');
 }); 
 
-app.controller("myCtrl",['$location', '$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth',function($location, $scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth){
+
+
+// controller for chat service
+app.controller("myCtrl",['$location', '$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth','GetClientToken',function($location, $scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth,GetClientToken){
 var initialdataloaded = false;
 
     var token;
-    var url = $location.search();
-      if(url) {
+    // var url = $location.search();
+    //   if(url) {
         
-        var req = {
-            method: 'POST',
-            url: '/current',
-            headers: {
-                "Content-Type": "application/json"    
-                    },
-            data: url
-        }
+    //     var req = {
+    //         method: 'POST',
+    //         url: '/current',
+    //         headers: {
+    //             "Content-Type": "application/json"    
+    //                 },
+    //         data: url
+    //     }
         
-        $http(req).then(function(resp){
-            console.log(resp);
+    //     $http(req).then(function(resp){
+    //         console.log(resp);
+    //         token = resp.data.token;
+    //     })
+    // }
+    // getToken();
+    GetClientToken.getToken()
+        .then(function(resp){
+            console.log(resp)
             token = resp.data.token;
-        })
-    }
+        });
+
+
 
     $scope.today = new Date(); 
     $scope.chat = new Date(); 
@@ -156,6 +167,50 @@ var initialdataloaded = false;
     })
 
 }]);
+
+//service for sending url and getting token
+app.factory('GetClientToken',['$http','$location',function($http,$location){
+    var GetClientToken = {};
+
+    GetClientToken.getToken = function(){
+        var url = $location.search();
+        if(url) {
+        
+            var req = {
+            method: 'POST',
+            url: '/current',
+            headers: {
+                "Content-Type": "application/json"    
+                    },
+            data: url
+            }
+        }
+        return $http(req);
+    }
+    return GetClientToken;
+
+}]);
+
+
+//controller for main site where user register
+app.controller('chatCtrl', function($scope,$http){
+    
+    $scope.submit = function(){
+
+        var ChatClients = {
+        "website_name" : $scope.webname,
+        "website_url" : $scope.weburl,
+        "client_token" : $scope.clientToken,
+        "developer_token" : $scope.developerToken,
+        "slack_url" : $scope.slackUrl
+        };
+        console.log(ChatClients);
+        $http.post("/update/",ChatClients)
+        .success(function(data, status, headers, config){
+            console.log("inserted Successfully");
+        });
+    }
+});
 
 
 //directive for ngenter

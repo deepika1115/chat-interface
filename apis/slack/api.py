@@ -3,7 +3,7 @@ from protorpc import remote
 from protorpc import message_types
 
 from google.appengine.ext import ndb
-from .rpc import slackData
+from .rpc import SlackData
 from apis import api_collection
 
 # @endpoints.api(name ='clientHandle',
@@ -16,4 +16,5 @@ class SlackHandle(remote.Service):
                     path = "apis/slack/slack_handle",
                     http_method = "POST")
   def slack_handle(self, request):
-    request.SlackData()
+    # request.slack_data
+    pass

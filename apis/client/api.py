@@ -15,5 +15,5 @@ class ClientHandle(remote.Service):
                     path = "apis/client/client_handle",
                     http_method = "POST")
   def client_handle(self, request):
-
+    pass
     return TokenResp(client_token = 'deepika')

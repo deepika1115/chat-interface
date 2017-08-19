@@ -26,32 +26,7 @@ var style = "line-height: 5rem; width: 5rem;height: 5rem; border-radius: 50%;" +
 
 
 
- // var style = "font-size:100% !important;\
- // position:fixed !important;\
- // bottom:15px !important;\
- // right:20px !important;\
- // left:auto !important;\
- // height:48px !important;\
- // width:auto !important;\
- // z-index:10000000000000 !important;\
- // background:#4c3dc7 !important;\
- // border:0 !important;\
- // border-radius:100px !important;\
- // box-shadow:0 3px 15px 0 rgba(0,0,0,0.25) !important;\
- // box-sizing:border-box !important;\
- // padding:0 20px !important;\
- // transition:all .4s,bottom .8s ease-in-out !important;\
- // cursor:pointer !important;\
- // outline:none !important;\
- // display:inline-block !important;\
- // margin:0 !important;\
- // -webkit-font-smoothing:antialiased !important;\
- // -webkit-tap-highlight-color:rgba(0,0,0,0) !important;\
- // animation-name:loadBubble;\
- // animation-iteration-count:1;\
- // animation-timing-function:ease-in-out;\
- // animation-duration:.2s;"
-
+ 
 
 	button = document.createElement("button");
 	button.innerHTML = "Chat";

@@ -15,5 +15,6 @@ class ApiaiHandle(remote.Service):
                     path = "apis/apiai/apiai_handle",
                     http_method = "POST")
   def apiai_handle(self, request):
-
+    pass
     return ApiaiResp(resp_data = 'deepika123')
+

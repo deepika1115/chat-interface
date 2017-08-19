@@ -1,5 +1,4 @@
 from protorpc import messages
-from protorpc import remote
 
 class UrlReq(messages.Message):
 	current_url = messages.StringField(1, required = True)
