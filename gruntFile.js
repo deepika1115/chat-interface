@@ -73,7 +73,7 @@ module.exports = function(grunt) {
             dev: {
                 options: {
                     //root:['<%= jsDir %>/app'],
-                    root_with_prefix: '"<%= jsDir %>/app ../../static/js/app"',
+                    root_with_prefix: '"<%= jsDir %>/app ../../../../app"',
                 },
                 dest: '<%= jsDir %>/app/dependecies.js'
             }

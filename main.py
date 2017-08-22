@@ -44,8 +44,8 @@ class CurrentHandler(webapp2.RequestHandler):
         "token" : token
       }
       self.response.write(json.dumps(obj))
-
-
+class ApiHandler(webapp2.RequestHandler):
+  def post(self):
     # global currentUrl
     self.response.headers['Content-type'] = 'application/json'
       

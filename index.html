@@ -23,7 +23,7 @@
       <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
       <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
       <script src="js/bower_components/angular-google-gapi/dist/angular-google-gapi.min.js"></script>
-
+      <script src="js/bower_components/google-closure-library/closure/goog/base.js"></script> 
       <!-- Initialize Firebase -->
       <script>
         var config = {
@@ -36,11 +36,12 @@
         };
         firebase.initializeApp(config);
       </script>
-      <!-- <script src="js/env.js"></script> -->
-      <script src="js/chat.js"></script>
+      <script type="text/javascript" src="js/app/dependecies.js"></script>
+      <script type="text/javascript" src="js/app/base.js"></script>
+      
     </head>
 
-    <body ng-app="myApp" ng-controller="myCtrl">
+    <body ng-app="chatModule" ng-controller="MainCtrl">
       <div ng-view></div>
     </body>
 </html>
