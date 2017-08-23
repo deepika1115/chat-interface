@@ -18,6 +18,7 @@
   "dependencies": {
     "angular": "^1.6.5",
     "angular-local-storage": "^0.7.1",
-    "angular-google-gapi": "^1.0.1"
+    "angular-google-gapi": "^1.0.1",
+    "google-closure-library": "*"
   }
 }
