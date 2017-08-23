@@ -1,13 +1,7 @@
-var app = angular.module('myApp', ['ngMaterial', 'LocalStorageModule','ngRoute','firebase', 'angular-google-gapi']);
+
 
     
-app.config(function (localStorageServiceProvider, $httpProvider, $mdThemingProvider) {
-    $mdThemingProvider.theme('default')
-    .primaryPalette('light-green')
-    .accentPalette('deep-orange');
-  localStorageServiceProvider
-    .setPrefix('chat');
-}); 
+
 
 
 
@@ -111,6 +105,7 @@ var initialdataloaded = false;
                     "sessionId": $scope.data.email
                 }
             }
+            
             $http(ob).then( function(resp) {
                 console.log(resp);
                 $scope.records.push({
@@ -123,8 +118,7 @@ var initialdataloaded = false;
 
             })
             
-            
-             $scope.text = "";
+            $scope.text = "";
               
                   $scope.updateScroll();
               
@@ -158,6 +152,7 @@ var initialdataloaded = false;
                     localStorageService.set('msgData',$scope.records);
                     $scope.$digest();
 
+
                 }
             }   
     });
@@ -190,6 +185,11 @@ app.factory('GetClientToken',['$http','$location',function($http,$location){
     return GetClientToken;
 
 }]);
+
+//service for sending data to api.ai and getting responce text
+
+
+
 
 
 //controller for main site where user register
@@ -276,4 +276,3 @@ app.config(['$routeProvider', function($routeProvider) {
 
 //     return app;
 // }])
-
