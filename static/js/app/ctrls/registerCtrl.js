@@ -5,10 +5,9 @@ goog.require('chat.service.registrationService');
 (function() {
    chat.ctrl.RegisterCtrl = function($scope, $http, registrationService) {
    	$scope.submit = function(){
-
         var ChatClients = {
-        "website_name" : $scope.webname,
-        "website_url" : $scope.weburl,
+          "website_name" : $scope.webname,
+          "website_url" : $scope.weburl,
         "client_token" : $scope.clientToken,
         "developer_token" : $scope.developerToken,
         "slack_url" : $scope.slackUrl

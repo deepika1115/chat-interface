@@ -22,11 +22,11 @@ class Datastorage(webapp2.RequestHandler):
     logging.info(d)
     getdata = model.ChatClients()
 
-    getdata.website_name=d['websiteName']
-    getdata.website_url=d['websiteUrl']
-    getdata.client_access_token=d['clientToken']
-    getdata.developer_access_token=d['developerToken']
-    getdata.slack_url=d['slackUrl']
+    getdata.website_name=d['website_name']
+    getdata.website_url=d['website_url']
+    getdata.client_access_token=d['client_token']
+    getdata.developer_access_token=d['developer_token']
+    getdata.slack_url=d['slack_url']
     
     z_key=getdata.put()
     

@@ -1,59 +1,67 @@
 goog.provide('chat.ctrl.ClientChatCtrl');
 goog.require('chat.module');
+
 goog.require('chat.service.clientService');
+goog.require('chat.service.apiAiService');
+
+goog.require('chat.directive.chatCardDirective');
+
 
 (function() {
-	chat.ctrl.ClientChatCtrl = function( $location, $scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth,clientService) {
-    	var initialdataloaded = false;
-
-        var token;
-        // var url = $location.search();
-        //   if(url) {
+	chat.ctrl.ClientChatCtrl = function( $location, $scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth,clientService,apiAiService) {
+    	
+        var initialdataloaded;
+        var localData;
+        var msgData;
+        var onLoad = function() {
             
-        //     var req = {
-        //         method: 'POST',
-        //         url: '/current',
-        //         headers: {
-        //             "Content-Type": "application/json"    
-        //                 },
-        //         data: url
-        //     }
-            
-        //     $http(req).then(function(resp){
-        //         console.log(resp);
-        //         token = resp.data.token;
-        //     })
-        // }
-        // getToken();
-        clientService.getToken()
+            initialdataloaded = false;
+            //service to send current url to backend and getting token
+            clientService.getToken()
             .then(function(resp){
                 console.log(resp)
-                token = resp.data.token;
+                if(resp.data.OK) {
+                    apiAiService.token = resp.data.token;
+                } else {
+                    alert('plz register to use chat app');
+                    return;
+                }
             });
 
+            var localData = localStorageService.get('localData');
+            $scope.data = localData || {
+                myName : "",
+                email : "",
+                company : ""
+            }
+            
+
+        }
+        onLoad();
 
 
         $scope.today = new Date(); 
         $scope.chat = new Date(); 
 
+            $scope.showThis = {}
+            $scope.show = function(elements){
+                for(var key in elements) {
+                    $scope.showThis[key] = elements[key]
+                }
+            }
+            $scope.show({
+                registerView: true,
+                chatView: false
+            })
 
-        var localData = localStorageService.get('localData');
-        $scope.data = localData || {
-            myName : "",
-            email : "",
-            company : ""
-        }
 
-        $scope.showThis = {}
-        $scope.show = function(which, that){
-            $scope.showThis[which] = that
-        }
-        $scope.show('registerView', true);
         $scope.save = function() {
             localStorageService.set('localData',$scope.data);
             console.log($scope.data.email)
-            $scope.show('registerView', false);
-            $scope.show('chatView', true);
+            $scope.show({
+                registerView: false,
+                chatView: true
+            })
         }
 
         var msgData = localStorageService.get('msgData');
@@ -62,62 +70,27 @@ goog.require('chat.service.clientService');
         $scope.text;
         $scope.isTyping = false;
         $scope.func = function(text){       //func for posting data to api.ai and pushing clients and server data in array
-            $scope.isTyping = true;
+            // $scope.isTyping = true;
 
             if(text && text != ""){
                 $scope.records.push({ 
                     type : "c",
                     data : text
                 });
-                var ob = {
-                    method: 'POST',
-                    url: 'https://api.api.ai/v1/query?v=20150910',
-                    headers: {
-                        'Authorization': 'Bearer ' + token,
-                            },
-                    data: {
-                        "query": [
-                            $scope.text
-                        ],
-                        "contexts": 
-                        [
-                            {
-                                "name": "",
-                                "lifespan": 4
-                            },
-                            {
-                                "name": "token",
-                                "parameters": {
-                                    "token": token
-                                    // "key": 'key'
-                                }
-                            }
-                        ],
-                        "location": {
-                            "latitude": 37.459157,
-                            "longitude": -122.17926
-                        },
-                        "timezone": "India/Delhi",
-                        "lang": "en",
-                        "sessionId": $scope.data.email
-                    }
-                }
-                $http(ob).then( function(resp) {
-                    console.log(resp);
+                $scope.text = "";
+                
+                // 
+                apiAiService.sendToBot(text).then( function(botSays) {
                     $scope.records.push({
                         type : "s",
-                        data : resp.data.result.fulfillment.speech
+                        data : botSays  
+                    })
+                    localStorageService.set('msgData',$scope.records);
+                    // $scope.isTyping = false;
                     
                 })
-                    localStorageService.set('msgData',$scope.records);
-                     $scope.isTyping = false;
-
-                })
+                $scope.updateScroll();
                 
-                
-                 $scope.text = "";
-                  
-                      $scope.updateScroll();
                   
                  
             }
@@ -159,7 +132,7 @@ goog.require('chat.service.clientService');
 
     }
 
-    chat.ctrl.ClientChatCtrl.$inject = ['$location', '$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth','clientService']
+    chat.ctrl.ClientChatCtrl.$inject = ['$location', '$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth','clientService','apiAiService'];
     chat.module.controller('ClientChatCtrl', chat.ctrl.ClientChatCtrl);
 
 })();

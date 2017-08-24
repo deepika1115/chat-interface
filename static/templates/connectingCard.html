@@ -3,7 +3,7 @@
    <md-toolbar  class="md-hue-2 bg_color" ng-class="{'minimise' : hidediv2}">
       <div class="md-toolbar-tools" layout layout-align="space-between center">
          <span >Connecting</span> 
-         <span ng-if="isTyping">Typing...</span>
+         <!-- <span ng-if="isTyping">Typing...</span> -->
          <div layout layout-align="end center">
             <!-- <i class="material-icons" ng-show="showicon" ng-click="hidediv2=false; showicon=false; rem=!rem" >keyboard_arrow_up</i> -->
             <!-- <i class="material-icons remove_icon" ng-hide="rem" ng-click="hidediv2=true; showicon=true; rem=true" >remove</i> -->
@@ -33,7 +33,9 @@
       <div layout="row" layout-align="space around center" class="bottom_icon_space">
          <!-- <md-button ng-disabled="true" class="md-icon-button"> <i class="material-icons" >add</i></md-button> -->
          <input id="bottom"
-         type="text" ng-model="text" placeholder="Enter text here" ng-enter = "func(text)" class="autofocus" onblur="this.focus()" autofocus flex=100/>
+         type="text" ng-model="text" placeholder="Enter text here" 
+         ng-keyup="$event.keyCode == 13 && func(text)"
+         class="autofocus" onblur="this.focus()" autofocus flex=100/>
          <md-button class="md-icon-button" ng-click="func(text)"><i class="material-icons" >arrow_forward</i></md-button>
       </div>
    </div>

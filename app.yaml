@@ -11,10 +11,10 @@ handlers:
   upload: index.html
   secure: always
 
-- url: /chatService
-  static_files: index.html
-  upload: index.html
-  secure: always
+# - url: /chatService
+#   static_files: index.html
+#   upload: index.html
+#   secure: always
 
 - url: /max
   static_files: connectingCard.html
@@ -41,31 +41,31 @@ handlers:
   static_dir: static/libs
   secure: always
 
-# - url: /_ah/api/.*
-  # script: apis.main.init
+- url: /_ah/api/.*
+  script: apis.main.init
 
 
 
-- url: /*
-  script: main.app
+# - url: /.*
+#   script: main.app
 
-# builtins:
-# - deferred: on
-# - remote_api: on
+builtins:
+- deferred: on
+- remote_api: on
 
 libraries:
 - name: ssl
   version: "2.7"
 
-# - name: pycrypto
-#   version: "2.6.1"
+- name: pycrypto
+  version: "2.6.1"
 
 # - name: endpoints
 #   version: 2.0
 
-# env_variables:
-#    # Replace with your endpoints service name.
-#    ENDPOINTS_SERVICE_NAME: sanskrut-dev.appspot.com
-#    # Replace with the version Id of your uploaded Endpoints service.
-#    ENDPOINTS_SERVICE_VERSION: 2017-08-19r1
+env_variables:
+  # Replace with your endpoints service name.
+  ENDPOINTS_SERVICE_NAME: sanskrut-dev.appspot.com
+  # Replace with the version Id of your uploaded Endpoints service.
+  ENDPOINTS_SERVICE_VERSION: 2017-08-19r1
 
