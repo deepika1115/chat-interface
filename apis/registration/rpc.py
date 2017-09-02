@@ -7,4 +7,7 @@ class ClientDetail(messages.Message):
   developer_token = messages.StringField(4, required = True)
   slack_url = messages.StringField(5, required = True)
 
+class ClientResp(messages.Message):
+ 	client_response = messages.StringField(1, required = True)
+
 

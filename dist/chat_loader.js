@@ -12,7 +12,7 @@ function button(show) {
 
 	frame = document.createElement("iframe");
 //?url=' + window.location.origin
-	frame.setAttribute("src", 'https://10-dot-sanskrut-dev.appspot.com/chatService#/?url=' + window.location.origin); 
+	frame.setAttribute("src", 'https://10-dot-sanskrut-dev.appspot.com/#/chatService/?url=' + window.location.origin); 
 	frame.style.width = '300px';
 	frame.style.height = '0';
 	frame.style.scrolling = "no";

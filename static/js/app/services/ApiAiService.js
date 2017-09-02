@@ -28,8 +28,8 @@ goog.require('chat.module');
                                 {
                                     "name": "token",
                                     "parameters": {
-                                    "token": app.token
-                                    // "key": 'key'
+                                    "token": app.token,
+                                    "key": 'key'
                                     }
                                 }
                             ],
@@ -46,6 +46,11 @@ goog.require('chat.module');
                 $http(ob).then( function(resp) {
                     q.resolve(resp.data.result.fulfillment.speech);
                 });
+
+            //     gapi.client.apiai_handler.apiai_handle(ob).excute(function(resp){
+            //     q.resolve(resp);
+            //     console.log(resp);
+            // });
             }
             return q.promise;
         }    

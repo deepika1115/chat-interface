@@ -1,5 +1,5 @@
-application: sanskrut-dev
-version: 10
+# application: sanskrut-dev
+# version: 10
 runtime: python27
 api_version: 1
 threadsafe: true
@@ -44,10 +44,8 @@ handlers:
 - url: /_ah/api/.*
   script: apis.main.init
 
-
-
-# - url: /.*
-#   script: main.app
+- url: /handler
+  script: main.app
 
 builtins:
 - deferred: on
@@ -59,6 +57,10 @@ libraries:
 
 - name: pycrypto
   version: "2.6.1"
+
+skip_files:
+- README.md/
+- node_modules/
 
 # - name: endpoints
 #   version: 2.0

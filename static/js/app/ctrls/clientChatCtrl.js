@@ -8,25 +8,35 @@ goog.require('chat.directive.chatCardDirective');
 
 
 (function() {
-	chat.ctrl.ClientChatCtrl = function( $location, $scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth,clientService,apiAiService) {
+	chat.ctrl.ClientChatCtrl = function($timeout, $location, $scope, localStorageService, $window,$interval, $http,$firebaseObject,$firebaseArray,$firebaseAuth,clientService,apiAiService) {
     	
         var initialdataloaded;
         var localData;
         var msgData;
         var onLoad = function() {
             
+         
             initialdataloaded = false;
             //service to send current url to backend and getting token
-            clientService.getToken()
-            .then(function(resp){
-                console.log(resp)
-                if(resp.data.OK) {
-                    apiAiService.token = resp.data.token;
-                } else {
-                    alert('plz register to use chat app');
-                    return;
-                }
-            });
+            clientService.init().then(function(){
+                clientService.getToken().then(function(resp){
+                    // console.log(resp)
+                    if(resp) {
+                        console.log(resp);
+                        apiAiService.token = resp.data.token;
+                    } else {
+                        alert('plz register to use chat app');
+                        return;
+                    }
+                })
+            })
+
+
+
+           
+            
+            
+        
 
             var localData = localStorageService.get('localData');
             $scope.data = localData || {
@@ -35,9 +45,12 @@ goog.require('chat.directive.chatCardDirective');
                 company : ""
             }
             
-
         }
+
         onLoad();
+
+
+
 
 
         $scope.today = new Date(); 
@@ -47,7 +60,7 @@ goog.require('chat.directive.chatCardDirective');
             $scope.show = function(elements){
                 for(var key in elements) {
                     $scope.showThis[key] = elements[key]
-                }
+               }
             }
             $scope.show({
                 registerView: true,
@@ -63,6 +76,7 @@ goog.require('chat.directive.chatCardDirective');
                 chatView: true
             })
         }
+        apiAiService.userAuthentication = $scope.data.email;
 
         var msgData = localStorageService.get('msgData');
         $scope.records = msgData || [];
@@ -132,7 +146,7 @@ goog.require('chat.directive.chatCardDirective');
 
     }
 
-    chat.ctrl.ClientChatCtrl.$inject = ['$location', '$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth','clientService','apiAiService'];
+    chat.ctrl.ClientChatCtrl.$inject = ['$timeout', '$location', '$scope', 'localStorageService', '$window','$interval', '$http','$firebaseObject','$firebaseArray','$firebaseAuth','clientService','apiAiService'];
     chat.module.controller('ClientChatCtrl', chat.ctrl.ClientChatCtrl);
 
 })();

@@ -33,17 +33,10 @@ goog.provide('chat.directive');
 	    .accentPalette('deep-orange');
 	  localStorageServiceProvider
 	    .setPrefix('chat');
-	}]);
 
-	//gapi run
-	chat.module.run(['GApi', 'GAuth',
-    function(GApi, GAuth) {
-        var BASE = '/_ah/api';
-        GApi.load('chat-interface', 'v1.0', BASE).then(function(resp) {
-            console.log('api: ' + resp.api + ', version: ' + resp.version + ' loaded');
-        }, function(resp) {
-            console.log('an error occured during loading api: ' + resp.api + ', resp.version: ' + version);
-        });
-    }
-]);
+	}]); 
 })();
+
+
+
+ 

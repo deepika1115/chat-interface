@@ -14,36 +14,36 @@ import model
 from firebase.firebase import FirebaseApplication
 
 # put data in ndb
-class Datastorage(webapp2.RequestHandler):
-  def post(self):
-    logging.info(self.request.body)
-    logging.info(json.loads(self.request.body))
-    d=json.loads(self.request.body)
-    logging.info(d)
-    getdata = model.ChatClients()
+# class Datastorage(webapp2.RequestHandler):
+#   def post(self):
+#     logging.info(self.request.body)
+#     logging.info(json.loads(self.request.body))
+#     d=json.loads(self.request.body)
+#     logging.info(d)
+#     getdata = model.ChatClients()
 
-    getdata.website_name=d['website_name']
-    getdata.website_url=d['website_url']
-    getdata.client_access_token=d['client_token']
-    getdata.developer_access_token=d['developer_token']
-    getdata.slack_url=d['slack_url']
+#     getdata.website_name=d['website_name']
+#     getdata.website_url=d['website_url']
+#     getdata.client_access_token=d['client_token']
+#     getdata.developer_access_token=d['developer_token']
+#     getdata.slack_url=d['slack_url']
     
-    z_key=getdata.put()
+#     z_key=getdata.put()
     
 
-class CurrentHandler(webapp2.RequestHandler):
-  def post(self):
-    logging.info(self.request.body)
-    if 'url' in self.request.body:
-      currentUrl = json.loads(self.request.body)['url']
-      logging.info(currentUrl)
-      q = model.ChatClients().query(model.ChatClients.website_url == currentUrl).get()
-      token = q.client_access_token
-      logging.info(token)
-      obj = {
-        "token" : token
-      }
-      self.response.write(json.dumps(obj))
+# class CurrentHandler(webapp2.RequestHandler):
+#   def post(self):
+#     logging.info(self.request.body)
+#     if 'url' in self.request.body:
+#       currentUrl = json.loads(self.request.body)['url']
+#       logging.info(currentUrl)
+#       q = model.ChatClients().query(model.ChatClients.website_url == currentUrl).get()
+#       token = q.client_access_token
+#       logging.info(token)
+#       obj = {
+#         "token" : token
+#       }
+#       self.response.write(json.dumps(obj))
 
 class ApiHandler(webapp2.RequestHandler):
   def post(self):
@@ -62,7 +62,6 @@ class ApiHandler(webapp2.RequestHandler):
     
     #getting data from api.ai
     req = json.loads(self.request.body)
-    
     data = req['result']['resolvedQuery']
     logging.info(data)
     session_id = req['sessionId']
@@ -183,8 +182,8 @@ class SlackHandler(webapp2.RequestHandler):
 
     
 app = webapp2.WSGIApplication([
-  ('/update/', Datastorage),
+  # ('/update/', Datastorage),
   ('/apidata', ApiHandler),
-  ('/slackdata',SlackHandler),
-  ('/current',CurrentHandler)
+  ('/slackdata',SlackHandler)
+  # ('/current',CurrentHandler)
 ], debug=True)

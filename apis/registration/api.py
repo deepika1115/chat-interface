@@ -5,6 +5,7 @@ from protorpc import message_types
 from google.appengine.ext import ndb
 from apis.ndb_models import ChatClients
 from .rpc import ClientDetail
+from .rpc import ClientResp
 from apis import api_collection
 
 # @endpoints.api(name ='clientHandle',
@@ -12,7 +13,7 @@ from apis import api_collection
 @api_collection.api_class(resource_name='register_handler')
 class RegisterHandle(remote.Service):
   @endpoints.method(ClientDetail,
-                    message_types.VoidMessage,
+                    ClientResp,
                     name = "register_handle",
                     path = "apis/registration/register_handle",
                     http_method = "POST")
@@ -24,3 +25,5 @@ class RegisterHandle(remote.Service):
     getdata.developer_access_token = request.developer_token
     getdata.slack_url = request.slack_url
     getdata.put()
+
+    return ClientResp(client_response = 'client details submitted')
