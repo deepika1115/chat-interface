@@ -11,6 +11,7 @@ from apis import api_collection
 # @endpoints.api(name ='clientHandle',
 #                version = 'v1')
 @api_collection.api_class(resource_name='register_handler')
+
 class RegisterHandle(remote.Service):
   @endpoints.method(ClientDetail,
                     ClientResp,

@@ -12,7 +12,7 @@ function button(show) {
 
 	frame = document.createElement("iframe");
 //?url=' + window.location.origin
-	frame.setAttribute("src", 'https://10-dot-sanskrut-dev.appspot.com/#/chatService/?url=' + window.location.origin); 
+	frame.setAttribute("src", 'https://chat10-dot-sanskrut-dev.appspot.com/#/chatService/?url=' + window.location.origin); 
 	frame.style.width = '300px';
 	frame.style.height = '0';
 	frame.style.scrolling = "no";
@@ -22,7 +22,7 @@ function button(show) {
 
 var style = "line-height: 5rem; width: 5rem;height: 5rem; border-radius: 50%;" +
 "font-size: 16px; text-align: center; text-transform: uppercase; text-decoration:none;" +
- "background-color: #ff7200; border: none; outline: none; cursor: pointer"
+"background-color: #ff7200; border: none; outline: none; cursor: pointer"
 
 
 
@@ -41,5 +41,5 @@ function toggle() {
 	is_show = !is_show;
 	var visible =  is_show ? 'visible' : 'hidden';
 	frame.style.visibility = visible;
-	frame.style.height = is_show ? '435px' : '0'
+	frame.style.height = is_show ? '435px' : '0';
 }

@@ -14,17 +14,21 @@ goog.require('chat.module');
         app.getToken = function(){
             
             var url = $location.search();
-            if(url) {
+            console.log(url);
+
+            if(url){
+                console.log(url.url);
                 var req = {
                 // method: 'POST',
                 // url: '/current',
                 // headers: {
                 //     "Content-Type": "application/json"    
                 //         },
-                "current_url" : url,
+                "current_url" : url.url.toString(),
                 "project_key" : 'key'
                 }
             }
+            console.log(req);
             // return $http(req);
             var q = $q.defer();
             gapi.client.chatinterface.client_handler.client_handle(req).execute(function(resp){

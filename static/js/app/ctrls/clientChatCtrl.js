@@ -23,20 +23,15 @@ goog.require('chat.directive.chatCardDirective');
                     // console.log(resp)
                     if(resp) {
                         console.log(resp);
-                        apiAiService.token = resp.data.token;
+                        apiAiService.token = resp.result.client_token;
                     } else {
                         alert('plz register to use chat app');
                         return;
                     }
                 })
             })
-
-
-
-           
             
             
-        
 
             var localData = localStorageService.get('localData');
             $scope.data = localData || {
@@ -127,6 +122,10 @@ goog.require('chat.directive.chatCardDirective');
                 //console.log(childsnapshot);
                 if(initialdataloaded){
                 console.log(requestSnapshot.val().message);
+                console.log(requestSnapshot.val().session_id);
+                console.log('user frontend email');
+                console.log($scope.data.email);
+
                 console.log($scope.records)
                     if(requestSnapshot.val().session_id == $scope.data.email){
                         $scope.records.push({ 

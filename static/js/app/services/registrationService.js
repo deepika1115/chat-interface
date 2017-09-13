@@ -14,7 +14,7 @@ goog.require('chat.module');
 
 
     app.registerUser = function(user){
-      	console.log(user)
+        console.log(user)
         	
         var q = $q.defer();
       	gapi.client.chatinterface.register_handler.register_handle(user).execute(function(resp){

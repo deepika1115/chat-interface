@@ -11,7 +11,7 @@ import urllib
 import logging
 import requests
 import model
-from firebase.firebase import FirebaseApplication
+from firebase import Firebase
 
 # put data in ndb
 # class Datastorage(webapp2.RequestHandler):
@@ -176,14 +176,16 @@ class SlackHandler(webapp2.RequestHandler):
       logging.info(slack_data)
       logging.info(session_id)
       logging.info(msg)
-      f = FirebaseApplication('https://chat-interface1.Firebaseio.com', None)
-      f.post('/chat-interface1', {'session_id': session_id, 'message': msg})
+      f = Firebase('https://chat-interface1.Firebaseio.com/chat-interface1', None)
+      f.push({'session_id': session_id, 'message': msg})
+      # f = FirebaseApplication('https://chat-interface1.Firebaseio.com', None)
+      # f.post('/chat-interface1', {'session_id': session_id, 'message': msg})
       
 
     
 app = webapp2.WSGIApplication([
   # ('/update/', Datastorage),
-  ('/apidata', ApiHandler),
-  ('/slackdata',SlackHandler)
+  ('/handler/apidata', ApiHandler),
+  ('/handler/slackdata',SlackHandler)
   # ('/current',CurrentHandler)
 ], debug=True)
